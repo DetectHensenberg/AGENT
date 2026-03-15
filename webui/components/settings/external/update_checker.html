@@ -1,21 +1,21 @@
 <html>
   <head>
-    <title>Update Checker</title>
+    <title>更新检查</title>
   </head>
 
   <body>
     <div x-data="{ get settings() { return $store.settings.settings } }">
       <template x-if="settings">
         <div>
-          <div class="section-title">Update Checker</div>
+          <div class="section-title">更新检查</div>
           <div class="section-description">
-            Update checker periodically checks for new releases of Agent Zero and will notify when an update is recommended.<br>No personal data is sent to the update server, only randomized+anonymized unique ID and current version number, which help us evaluate the importance of the update in case of critical bug fixes etc.
+            更新检查器会定期检查 Agent Zero 的新版本，并在建议更新时通知您。<br>不会向更新服务器发送个人数据，仅发送随机化+匿名化的唯一 ID 和当前版本号，这有助于我们评估关键错误修复等更新的重要性。
           </div>
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Enable Update Checker</div>
-              <div class="field-description">Enable update checker to notify about newer versions of Agent Zero.</div>
+              <div class="field-title">启用更新检查</div>
+              <div class="field-description">启用更新检查器以通知 Agent Zero 的新版本。</div>
             </div>
             <div class="field-control">
               <label class="toggle">

@@ -108,10 +108,10 @@ const model = {
       this.contexts = [...updatedContexts];
 
       // Show success notification
-      justToast("Chat deleted successfully", "success", 1000, "chat-removal");
+      justToast("聊天已成功删除", "success", 1000, "chat-removal");
     } catch (e) {
       console.error("Error deleting chat:", e);
-      toastFetchError("Error deleting chat", e);
+      toastFetchError("删除聊天失败", e);
     }
   },
 
@@ -148,7 +148,7 @@ const model = {
         globalThis.resetCounter = globalThis.resetCounter + 1;
       }      
     } catch (e) {
-      toastFetchError("Error resetting chat", e);
+      toastFetchError("重置聊天失败", e);
     }
   },
 
@@ -167,7 +167,7 @@ const model = {
       }
 
     } catch (e) {
-      toastFetchError("Error creating new chat", e);
+      toastFetchError("创建新聊天失败", e);
     }
   },
 
@@ -189,16 +189,16 @@ const model = {
       const response = await sendJsonData("/chat_load", { chats: fileContents });
 
       if (!response) {
-        toast("No response returned.", "error");
+        toast("未返回响应。", "error");
       } else {
         // Set context to first loaded chat
         if (response.ctxids?.[0]) {
           setContext(response.ctxids[0]);
         }
-        toast("Chats loaded.", "success");
+        toast("聊天已加载。", "success");
       }
     } catch (e) {
-      toastFetchError("Error loading chats", e);
+      toastFetchError("加载聊天失败", e);
     }
   },
 
@@ -209,13 +209,13 @@ const model = {
       const response = await sendJsonData("/chat_export", { ctxid: context });
 
       if (!response) {
-        toast("No response returned.", "error");
+        toast("未返回响应。", "error");
       } else {
         this.downloadFile(response.ctxid + ".json", response.content);
-        toast("Chat file downloaded.", "success");
+        toast("聊天文件已下载。", "success");
       }
     } catch (e) {
-      toastFetchError("Error saving chat", e);
+      toastFetchError("保存聊天失败", e);
     }
   },
 
@@ -298,8 +298,8 @@ const model = {
     const connectionStatus = getConnectionStatus();
     if (connectionStatus === false) {
       await notificationStore.frontendError(
-        "Backend disconnected, cannot restart.",
-        "Restart Error",
+        "后端已断开连接，无法重启。",
+        "重启错误",
       );
       return;
     }
@@ -307,8 +307,8 @@ const model = {
     // Create a backend notification first so other tabs have a chance to show it
     // before the process is replaced.
     const notificationId = await notificationStore.info(
-      "Restarting...",
-      "System Restart",
+      "正在重启...",
+      "系统重启",
       "",
       9999,
       "restart",

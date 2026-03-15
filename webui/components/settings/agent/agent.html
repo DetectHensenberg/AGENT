@@ -1,22 +1,22 @@
 <html>
   <head>
-    <title>Agent Config</title>
+    <title>代理配置</title>
   </head>
 
   <body>
     <div x-data>
       <template x-if="$store.settings.settings">
         <div>
-          <div class="section-title">Agent Config</div>
+          <div class="section-title">代理配置</div>
           <div class="section-description">
-            Agent parameters.
+            代理参数。
           </div>
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Default agent profile</div>
+              <div class="field-title">默认代理配置文件</div>
               <div class="field-description">
-                Subdirectory of /agents folder to be used by default agent no. 0. Subordinate agents can be spawned with other profiles, that is on their superior agent to decide. This setting affects the behaviour of the top level agent you communicate with.
+                /agents 文件夹的子目录，用于默认代理 0 号。下属代理可以使用其他配置文件启动，这由其上级代理决定。此设置影响你与之通信的顶层代理的行为。
               </div>
             </div>
             <div class="field-control">
@@ -30,9 +30,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Knowledge subdirectory</div>
+              <div class="field-title">知识子目录</div>
               <div class="field-description">
-                Subdirectory of /knowledge folder to use for agent knowledge import. 'default' subfolder is always imported and contains framework knowledge.
+                /knowledge 文件夹的子目录，用于代理知识导入。'default' 子文件夹始终会被导入，包含框架知识。
               </div>
             </div>
             <div class="field-control">

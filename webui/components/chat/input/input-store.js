@@ -21,8 +21,8 @@ const model = {
 
   get inputPlaceholder() {
     const state = this._getSendState();
-    if (state === "all") return "Press Enter to send queued messages";
-    return "Type your message here...";
+    if (state === "all") return "按 Enter 发送队列消息";
+    return "在此输入消息...";
   },
 
   // Computed: send button icon type
@@ -44,9 +44,9 @@ const model = {
   // Computed: send button title
   get sendButtonTitle() {
     const state = this._getSendState();
-    if (state === "all") return "Send all queued messages";
-    if (state === "queue") return "Add to queue";
-    return "Send message";
+    if (state === "all") return "发送所有队列消息";
+    if (state === "queue") return "添加到队列";
+    return "发送消息";
   },
 
   init() {
@@ -80,7 +80,7 @@ const model = {
     } catch (e) {
       this.paused = prev;
       if (globalThis.toastFetchError) {
-        globalThis.toastFetchError("Error pausing agent", e);
+        globalThis.toastFetchError("暂停代理失败", e);
       }
     }
   },
@@ -91,7 +91,7 @@ const model = {
       await globalThis.sendJsonData("/nudge", { ctxid: context });
     } catch (e) {
       if (globalThis.toastFetchError) {
-        globalThis.toastFetchError("Error nudging agent", e);
+        globalThis.toastFetchError("提醒代理失败", e);
       }
     }
   },
@@ -110,7 +110,7 @@ const model = {
       // progress notification
       shortcuts.frontendNotification({
         type: shortcuts.NotificationType.PROGRESS,
-        message: "Loading knowledge...",
+        message: "正在加载知识...",
         priority: shortcuts.NotificationPriority.NORMAL,
         displayTime: 999,
         group: "knowledge_load",
@@ -125,7 +125,7 @@ const model = {
       // finished notification
       shortcuts.frontendNotification({
         type: shortcuts.NotificationType.SUCCESS,
-        message: "Knowledge loaded successfully",
+        message: "知识加载成功",
         priority: shortcuts.NotificationPriority.NORMAL,
         displayTime: 2,
         group: "knowledge_load",
@@ -135,7 +135,7 @@ const model = {
       // error notification
       shortcuts.frontendNotification({
         type: shortcuts.NotificationType.ERROR,
-        message: "Error loading knowledge",
+        message: "知识加载失败",
         priority: shortcuts.NotificationPriority.NORMAL,
         displayTime: 5,
         group: "knowledge_load",
@@ -172,14 +172,14 @@ const model = {
           const data = await response.json();
           if (globalThis.toast) {
             globalThis.toast(
-              "Knowledge files imported: " + data.filenames.join(", "),
+              "已导入知识文件: " + data.filenames.join(", "),
               "success"
             );
           }
         }
       } catch (e) {
         if (globalThis.toastFetchError) {
-          globalThis.toastFetchError("Error loading knowledge", e);
+          globalThis.toastFetchError("加载知识失败", e);
         }
       }
     };

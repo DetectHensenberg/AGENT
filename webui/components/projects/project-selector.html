@@ -20,7 +20,7 @@
                 </template>
                 <template x-if="!$store.chats.selectedContext.project?.name">
                     <button @click="open = !open" type="button" class="button project-dropdown-button">
-                        No project
+                        无项目
                         <span class="icon material-symbols-outlined">arrow_drop_down</span>
                     </button>
                 </template>
@@ -28,21 +28,21 @@
                 <div x-show="open" x-init="$store.projects.loadProjectsList()" class="dropdown-menu" style="display: none;" x-transition>
                     <button type="button" @click="$store.projects.openProjectsModal(); open = false;" class="dropdown-item">
                         <span class="icon material-symbols-outlined">snippet_folder</span>
-                        <span>Projects</span>
+                        <span>项目</span>
                     </button>
 
                     <button type="button" x-show="$store.chats.selectedContext.project?.name" @click="$store.projects.editActiveProject(); open = false;" class="dropdown-item">
                         <span class="icon material-symbols-outlined">edit</span>
-                        <span>Edit <span x-text="$store.chats.selectedContext.project?.title"></span></span>
+                        <span>编辑 <span x-text="$store.chats.selectedContext.project?.title"></span></span>
                     </button>
 
                     <button type="button" x-show="$store.chats.selectedContext.project?.name" @click="$store.projects.deactivateProject(); open = false;" class="dropdown-item">
                         <span class="icon material-symbols-outlined">close</span>
-                        <span>Deactivate</span>
+                        <span>停用</span>
                     </button>
 
                     <div x-show="$store.projects.projectList.length > 0" class="dropdown-separator"></div>
-                    <div x-show="$store.projects.projectList.length > 0" class="dropdown-header">Switch Project</div>
+                    <div x-show="$store.projects.projectList.length > 0" class="dropdown-header">切换项目</div>
 
                     <template x-for="project in $store.projects.projectList" :key="project.name">
                         <button type="button" @click="$store.projects.activateProject(project.name); open = false;" class="dropdown-item">

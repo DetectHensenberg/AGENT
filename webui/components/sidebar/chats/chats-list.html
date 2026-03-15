@@ -11,9 +11,9 @@
     <template x-if="$store.chats">
       <div class="chats-list-container" x-data>
         <div class="section-header-row">
-          <h3 class="section-header">Chats</h3>
+          <h3 class="section-header">对话</h3>
           <!-- New Chat Button -->
-          <button id="newChat" class="btn-icon-action chat-list-action-btn" @click="$store.chats.newChat()" aria-label="New Chat" title="New Chat" data-bs-placement="top" data-bs-trigger="hover">
+          <button id="newChat" class="btn-icon-action chat-list-action-btn" @click="$store.chats.newChat()" aria-label="新建对话" title="新建对话" data-bs-placement="top" data-bs-trigger="hover">
             <span class="material-symbols-outlined">edit_square</span>
           </button>
         </div>
@@ -31,7 +31,7 @@
                   <span class="chat-name"
                     x-text="context.name ? context.name : 'Chat #' + context.no"></span>
                 </div>
-                <button class="btn-icon-action chat-list-action-btn" title="Close chat" @click.stop="$confirmClick($event, () => $store.chats.killChat(context.id))">
+                <button class="btn-icon-action chat-list-action-btn" title="关闭对话" @click.stop="$confirmClick($event, () => $store.chats.killChat(context.id))">
                   <span class="material-symbols-outlined">close</span>
                 </button>
               </div>
@@ -39,7 +39,7 @@
           </template>
         </ul>
         <div class="empty-list-message" x-show="$store.chats.contexts.length === 0">
-          <p><i>No chats to list.</i></p>
+          <p><i>暂无对话</i></p>
         </div>
       </div>
     </template>

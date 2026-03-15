@@ -13,7 +13,7 @@
               data-bs-toggle="collapse"
               @click="$store.sidebar.toggleSection('preferences')"
               x-effect="!$store.sidebar.isSectionOpen('preferences') ? $el.classList.add('collapsed') : $el.classList.remove('collapsed')">
-            Preferences
+            偏好设置
             <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
               <path d="M8 4l8 8-8 8" />
             </svg>
@@ -21,14 +21,14 @@
           <ul class="config-list collapse" id="preferences-collapse"
               x-effect="(() => { const c = bootstrap.Collapse.getOrCreateInstance($el, { toggle: false }); $store.sidebar.isSectionOpen('preferences') ? c.show() : c.hide(); })()">
             <li x-data>
-              <span class="switch-label">Dark mode</span>
+              <span class="switch-label">深色模式</span>
               <label class="switch">
                 <input type="checkbox" x-model="$store.preferences.darkMode">
                 <span class="slider"></span>
               </label>
             </li>
             <li x-data class="chat-width-setting">
-              <span class="width-label">Width</span>
+              <span class="width-label">宽度</span>
               <div class="width-buttons">
                 <template x-for="(opt, idx) in $store.preferences.chatWidthOptions" :key="opt.value">
                   <span class="width-btn-wrapper">
@@ -43,7 +43,7 @@
               </div>
             </li>
             <li x-data class="detail-mode-setting">
-              <span class="detail-label">Detail</span>
+              <span class="detail-label">详细程度</span>
               <div class="detail-buttons">
                 <template x-for="(opt, idx) in $store.preferences.detailModeOptions" :key="opt.value">
                   <span class="detail-btn-wrapper">
@@ -59,14 +59,14 @@
               </div>
             </li>
             <li x-data>
-              <span class="switch-label">Speech</span>
+              <span class="switch-label">语音</span>
               <label class="switch">
                 <input type="checkbox" x-model="$store.preferences.speech">
                 <span class="slider"></span>
               </label>
             </li>
             <li x-data>
-              <span>Show utility messages</span>
+              <span>显示工具消息</span>
               <label class="switch">
                 <input type="checkbox" x-model="$store.preferences.showUtils">
                 <span class="slider"></span>

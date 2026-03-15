@@ -12,27 +12,27 @@
   <div class="wrapper" x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false" @keydown.escape.window="dropdownOpen = false" x-init="$watch('dropdownOpen', v => v && $store.sidebar.updateDropdownPosition($el))">
     <div id="quick-actions">
       <!-- Dashboard -->
-      <button class="config-button" id="dashboard" @click="deselectChat()" title="Dashboard">
+      <button class="config-button" id="dashboard" @click="deselectChat()" title="主页">
         <span class="material-symbols-outlined">home</span>
       </button>
 
       <!-- Memory -->
-      <button class="config-button" id="memory-dash" @click="openModal('modals/memory/memory-dashboard.html')" title="Memory">
+      <button class="config-button" id="memory-dash" @click="openModal('modals/memory/memory-dashboard.html')" title="记忆">
         <span class="material-symbols-outlined">psychology</span>
       </button>
 
       <!-- Scheduler -->
-      <button class="config-button" id="scheduler" @click="openModal('modals/scheduler/scheduler-modal.html')" title="Scheduler">
+      <button class="config-button" id="scheduler" @click="openModal('modals/scheduler/scheduler-modal.html')" title="定时任务">
         <span class="material-symbols-outlined">schedule</span>
       </button>
 
       <!-- Settings -->
-      <button class="config-button" id="settings" @click="openModal('settings/settings.html')" title="Settings">
+      <button class="config-button" id="settings" @click="openModal('settings/settings.html')" title="设置">
         <span class="material-symbols-outlined">settings</span>
       </button>
 
       <!-- Dropdown Toggle -->
-      <button class="config-button dropdown-toggle" @click="dropdownOpen = !dropdownOpen" title="More options">
+      <button class="config-button dropdown-toggle" @click="dropdownOpen = !dropdownOpen" title="更多选项">
         <span class="material-symbols-outlined" :class="dropdownOpen ? 'rotated' : ''">expand_more</span>
       </button>
     </div>
@@ -42,66 +42,66 @@
          x-show="dropdownOpen"
          :style="$store.sidebar.dropdownStyle">
       
-      <div class="dropdown-header">Navigation</div>
+      <div class="dropdown-header">导航</div>
       
       <button class="dropdown-item" @click="deselectChat(); dropdownOpen = false">
         <span class="material-symbols-outlined">home</span>
-        <span>Dashboard</span>
+        <span>主页</span>
       </button>
 
       <button class="dropdown-item" @click="$store.projects.openProjectsModal(); dropdownOpen = false">
         <span class="material-symbols-outlined">snippet_folder</span>
-        <span>Projects</span>
+        <span>项目</span>
       </button>
       
       <button class="dropdown-item" @click="openModal('modals/memory/memory-dashboard.html'); dropdownOpen = false">
         <span class="material-symbols-outlined">psychology</span>
-        <span>Memories</span>
+        <span>记忆</span>
       </button>
       
       <button class="dropdown-item" @click="openModal('modals/scheduler/scheduler-modal.html'); dropdownOpen = false">
         <span class="material-symbols-outlined">schedule</span>
-        <span>Scheduler</span>
+        <span>定时任务</span>
       </button>
       
       <button class="dropdown-item" @click="openModal('settings/settings.html'); dropdownOpen = false">
         <span class="material-symbols-outlined">settings</span>
-        <span>Settings</span>
+        <span>设置</span>
       </button>
       
       <div class="dropdown-separator"></div>
-      <div class="dropdown-header">Chat Actions</div>
+      <div class="dropdown-header">对话操作</div>
       
       <button class="dropdown-item" @click="$store.chats.newChat(); dropdownOpen = false">
         <span class="material-symbols-outlined">edit_square</span>
-        <span>New Chat</span>
+        <span>新建对话</span>
       </button>
       
       <button class="dropdown-item" @click="$store.chats.loadChats(); dropdownOpen = false">
         <span class="material-symbols-outlined">folder_open</span>
-        <span>Load Chat</span>
+        <span>加载对话</span>
       </button>
       
       <button class="dropdown-item" @click="$store.chats.saveChat(); dropdownOpen = false" :disabled="!$store.chats.selected">
         <span class="material-symbols-outlined">save</span>
-        <span>Save Chat</span>
+        <span>保存对话</span>
       </button>
 
       <button class="dropdown-item" @click="$confirmClick($event, () => { $store.chats.resetChat(); dropdownOpen = false })" :disabled="!$store.chats.selected">
         <span class="material-symbols-outlined">delete_sweep</span>
-        <span>Clear Chat</span>
+        <span>清空对话</span>
       </button>
       
       <div class="dropdown-separator"></div>
       
       <button class="dropdown-item" @click="$confirmClick($event, () => { $store.chats.logout(); dropdownOpen = false })" :disabled="!$store.chats.loggedIn">
         <span class="material-symbols-outlined">logout</span>
-        <span>Logout</span>
+        <span>退出登录</span>
       </button>
 
       <button class="dropdown-item" @click="$confirmClick($event, () => { $store.chats.restart(); dropdownOpen = false })">
         <span class="material-symbols-outlined">restart_alt</span>
-        <span>Restart A0</span>
+        <span>重启 A0</span>
       </button>
 
     </div>

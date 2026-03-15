@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Image Viewer</title>
+    <title>图片查看器</title>
 
     <script type="module">
         import { store } from "/components/modals/image-viewer/image-viewer-store.js";
@@ -33,12 +33,12 @@
                     <!-- Loading indicator -->
                     <div x-show="!$store.imageViewer.imageLoaded && !$store.imageViewer.imageError" class="loading-indicator">
                         <div class="loading-spinner"></div>
-                        <p>Loading image...</p>
+                        <p>正在加载图片...</p>
                     </div>
                     
                     <!-- Error indicator -->
                     <div x-show="$store.imageViewer.imageError" class="error-indicator">
-                        <p>Failed to load image</p>
+                        <p>图片加载失败</p>
                     </div>
                 </div>
 

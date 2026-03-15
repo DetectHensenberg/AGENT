@@ -1,37 +1,37 @@
 <html>
   <head>
-    <title>External MCP Servers</title>
+    <title>外部 MCP 服务器</title>
   </head>
 
   <body>
     <div x-data="{ get settings() { return $store.settings.settings } }">
       <template x-if="settings">
         <div>
-          <div class="section-title">External MCP Servers</div>
+          <div class="section-title">外部 MCP 服务器</div>
           <div class="section-description">
-            Agent Zero can use external MCP servers, local or remote as tools.
+            Agent Zero 可以使用外部 MCP 服务器（本地或远程）作为工具。
           </div>
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">MCP Servers Configuration</div>
-              <div class="field-description">External MCP servers can be configured here.</div>
+              <div class="field-title">MCP 服务器配置</div>
+              <div class="field-description">可以在此处配置外部 MCP 服务器。</div>
             </div>
             <div class="field-control">
               <button
                 class="btn btn-field"
                 @click="$store.settings.handleFieldButton({ id: 'mcp_servers_config' })"
               >
-                Open
+                打开
               </button>
             </div>
           </div>
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">MCP Client Init Timeout</div>
+              <div class="field-title">MCP 客户端初始化超时</div>
               <div class="field-description">
-                Timeout for MCP client initialization (in seconds). Higher values might be required for complex MCPs, but might also slowdown system startup.
+                MCP 客户端初始化超时时间（秒）。复杂的 MCP 可能需要更高的值，但也可能会减慢系统启动。
               </div>
             </div>
             <div class="field-control">
@@ -41,9 +41,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">MCP Client Tool Timeout</div>
+              <div class="field-title">MCP 客户端工具超时</div>
               <div class="field-description">
-                Timeout for MCP client tool execution. Higher values might be required for complex tools, but might also result in long responses with failing tools.
+                MCP 客户端工具执行超时时间。复杂的工具可能需要更高的值，但也可能导致失败工具的响应时间过长。
               </div>
             </div>
             <div class="field-control">

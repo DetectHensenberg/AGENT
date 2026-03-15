@@ -1,7 +1,7 @@
 <html class="step-detail-modal">
 
 <head>
-    <title>Step Details</title>
+    <title>步骤详情</title>
     <script type="module">
         import { store } from "/components/modals/process-step-detail/step-detail-store.js";
     </script>
@@ -25,18 +25,18 @@
                     <div class="header-actions">
                         <button class="btn btn-action-header copy-all" 
                                 @click.stop="$store.stepDetail.copyToClipboard($store.stepDetail.formatStepForCopy($store.stepDetail.selectedStepForDetail))"
-                                title="Copy Complete Step with Metadata">
-                            <span class="material-symbols-outlined">copy_all</span> All
+                                title="复制完整步骤及元数据">
+                            <span class="material-symbols-outlined">copy_all</span> 全部
                         </button>
                         <button class="btn btn-action-header copy-content" 
                                 @click.stop="$store.stepDetail.copyToClipboard($store.stepDetail.getStepPrimaryContent($store.stepDetail.selectedStepForDetail))"
-                                title="Copy Raw LLM Response">
-                            <span class="material-symbols-outlined">content_copy</span> Content
+                                title="复制原始 LLM 响应">
+                            <span class="material-symbols-outlined">content_copy</span> 内容
                         </button>
                         <button class="btn btn-action-header toggle-raw" 
                                 @click.stop="showRaw = !showRaw"
                                 :class="{ 'active': showRaw }"
-                                title="Toggle Raw JSON View">
+                                title="切换原始 JSON 视图">
                             <span class="material-symbols-outlined">data_object</span>
                         </button>
                     </div>
@@ -54,7 +54,7 @@
                         <!-- Heading/Title Section -->
                         <template x-if="$store.stepDetail.selectedStepForDetail?.heading">
                             <div class="content-block">
-                                <h4>Heading</h4>
+                                <h4>标题</h4>
                                 <div class="content-text" x-text="$store.stepDetail.cleanHeading($store.stepDetail.selectedStepForDetail?.heading)"></div>
                                 <div class="step-action-buttons" data-segment="heading"></div>
                             </div>
@@ -76,7 +76,7 @@
                         <!-- Content -->
                         <template x-if="$store.stepDetail.selectedStepForDetail?.content">
                             <div class="content-block">
-                                <h4>Content</h4>
+                                <h4>内容</h4>
                                 <pre class="result-content" x-text="$store.stepDetail.selectedStepForDetail?.content"></pre>
                                 <div class="step-action-buttons" data-segment="content"></div>
                             </div>

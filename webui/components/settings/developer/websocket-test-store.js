@@ -228,18 +228,18 @@ const model = {
         const result = await step();
         results.push(result);
         if (!result.ok) {
-          await this._toast("warning", `Automatic suite halted: ${result.label} failed`, "WebSocket Harness");
+          await this._toast("warning", `自动套件已停止: ${result.label} 失败`, "WebSocket 测试");
           this.appendLog(`Automatic suite halted on step: ${result.label} (${result.error || 'unknown error'})`);
           this.running = false;
           return;
         }
       }
 
-      await this._toast("success", "Automatic WebSocket validation succeeded", "WebSocket Harness");
+      await this._toast("success", "WebSocket 自动验证成功", "WebSocket 测试");
       this.appendLog("Automatic suite completed successfully.");
     } catch (error) {
       this.appendLog(`Automatic suite failed: ${error.message || error}`);
-      await this._toast("error", `Automatic suite failed: ${error.message || error}`, "WebSocket Harness");
+      await this._toast("error", `自动套件失败: ${error.message || error}`, "WebSocket 测试");
     } finally {
       this.running = false;
     }
@@ -256,12 +256,12 @@ const model = {
         `${result.ok ? "PASS" : "FAIL"} - ${result.label}${result.error ? `: ${result.error}` : ""}`,
       );
       if (result.ok) {
-        await this._toast("success", `${result.label} succeeded`, "WebSocket Harness");
+        await this._toast("success", `${result.label} 成功`, "WebSocket 测试");
       } else {
-        await this._toast("warning", `${result.label} failed: ${result.error}`, "WebSocket Harness");
+        await this._toast("warning", `${result.label} 失败: ${result.error}`, "WebSocket 测试");
       }
     } catch (error) {
-      await this._toast("error", `${error.message || error}`, "WebSocket Harness");
+      await this._toast("error", `${error.message || error}`, "WebSocket 测试");
       this.appendLog(`Manual step error: ${error.message || error}`);
     } finally {
       this.manualRunning = false;
@@ -908,9 +908,9 @@ const model = {
         { requested_at: now() },
         options,
       );
-      await this._toast("info", "Broadcast demo triggered. Check log output.", "WebSocket Harness");
+      await this._toast("info", "广播演示已触发。请检查日志输出。", "WebSocket 测试");
     } catch (error) {
-      await this._toast("error", `Broadcast demo failed: ${error.message || error}`, "WebSocket Harness");
+      await this._toast("error", `广播演示失败: ${error.message || error}`, "WebSocket 测试");
       this.appendLog(`Broadcast demo failed: ${error.message || error}`);
     }
   },

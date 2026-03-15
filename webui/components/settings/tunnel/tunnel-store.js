@@ -29,14 +29,14 @@ const model = {
     if (!this.microsoftLoginCode) return;
     navigator.clipboard.writeText(this.microsoftLoginCode).then(() => {
       this.codeCopied = true;
-      window.toastFrontendInfo("Login code copied to clipboard!", "Clipboard");
+      window.toastFrontendInfo("登录代码已复制到剪贴板！", "剪贴板");
       // Reset after 3 seconds
       setTimeout(() => {
         this.codeCopied = false;
       }, 3000);
     }).catch((err) => {
       console.error("Failed to copy code: ", err);
-      window.toastFrontendError("Failed to copy login code", "Clipboard Error");
+      window.toastFrontendError("复制登录代码失败", "剪贴板错误");
     });
   },
 
@@ -50,7 +50,7 @@ const model = {
           break;
         case "download_progress":
           if (n.data && n.data.percent !== undefined) {
-            this.loadingText = `Downloading: ${n.data.percent.toFixed(1)}%`;
+            this.loadingText = `正在下载: ${n.data.percent.toFixed(1)}%`;
           } else {
             this.loadingText = n.message;
           }
@@ -67,14 +67,14 @@ const model = {
           if (n.data && n.data.code) {
             this.microsoftLoginCode = n.data.code;
             this.microsoftLoginUrl = n.data.url || "";
-            this.loadingText = "Waiting for Microsoft login...";
+            this.loadingText = "等待 Microsoft 登录...";
           } else {
             this.loadingText = n.message;
           }
           break;
         case "error":
           this.hasError = true;
-          window.toastFrontendError(n.message, "Tunnel Error");
+          window.toastFrontendError(n.message, "隧道错误");
           this.stopNotificationPolling();
           break;
         case "tunnel_url":
@@ -145,7 +145,7 @@ const model = {
     } catch (error) {
       console.error("Error generating QR code:", error);
       qrContainer.innerHTML =
-        '<div class="qr-error">QR code generation failed</div>';
+        '<div class="qr-error">QR 码生成失败</div>';
     }
   },
 
@@ -214,20 +214,20 @@ const model = {
     // Call generate but with a confirmation first
     if (
       confirm(
-        "Are you sure you want to generate a new tunnel URL? The old URL will no longer work."
+        "您确定要生成新的隧道 URL 吗？旧的 URL 将不再有效。"
       )
     ) {
 
       this.isLoading = true;
       this.hasError = false;
       this.clearMicrosoftLogin();
-      this.loadingText = "Refreshing tunnel...";
+      this.loadingText = "正在刷新隧道...";
 
       // Change refresh button appearance
       const refreshButton = document.querySelector("#tunnel-settings-section .refresh-link-button");
       const originalContent = refreshButton.innerHTML;
       refreshButton.innerHTML =
-        '<span class="icon material-symbols-outlined spin">progress_activity</span> Refreshing...';
+        '<span class="icon material-symbols-outlined spin">progress_activity</span> 正在刷新...';
       refreshButton.disabled = true;
       refreshButton.classList.add("refreshing");
 
@@ -252,7 +252,7 @@ const model = {
         await this.generateLink();
       } catch (error) {
         console.error("Error refreshing tunnel:", error);
-        window.toastFrontendError("Error refreshing tunnel", "Tunnel Error");
+        window.toastFrontendError("刷新隧道失败", "隧道错误");
         this.isLoading = false;
         this.loadingText = "";
       } finally {
@@ -281,12 +281,11 @@ const model = {
       // If no authentication is set, warn the user
       if (!hasAuth) {
         const proceed = confirm(
-          "WARNING: No authentication is configured for your Agent Zero instance.\n\n" +
-            "Creating a public tunnel without authentication means anyone with the URL " +
-            "can access your Agent Zero instance.\n\n" +
-            "It is recommended to set up authentication in the Settings > Authentication section " +
-            "before creating a public tunnel.\n\n" +
-            "Do you want to proceed anyway?"
+          "警告：您的 Agent Zero 实例未配置身份验证。\n\n" +
+            "在没有身份验证的情况下创建公共隧道意味着任何拥有 URL 的人" +
+            "都可以访问您的 Agent Zero 实例。\n\n" +
+            "建议在创建公共隧道之前，在 设置 > 身份验证 中设置身份验证。\n\n" +
+            "是否仍要继续？"
         );
 
         if (!proceed) {
@@ -301,13 +300,13 @@ const model = {
     this.isLoading = true;
     this.hasError = false;
     this.clearMicrosoftLogin();
-    this.loadingText = "Starting tunnel...";
+    this.loadingText = "正在启动隧道...";
 
     // Change create button appearance
     const createButton = document.querySelector("#tunnel-settings-section .tunnel-actions .btn-ok");
     if (createButton) {
       createButton.innerHTML =
-        '<span class="icon material-symbols-outlined spin">progress_activity</span> Creating...';
+        '<span class="icon material-symbols-outlined spin">progress_activity</span> 正在创建...';
       createButton.disabled = true;
       createButton.classList.add("creating");
     }
@@ -338,7 +337,7 @@ const model = {
       // Check for error
       if (!data.success && data.message) {
         this.hasError = true;
-        window.toastFrontendError(data.message, "Tunnel Error");
+        window.toastFrontendError(data.message, "隧道错误");
         console.error("Tunnel creation failed:", data);
         this.stopNotificationPolling();
         return;
@@ -357,12 +356,12 @@ const model = {
 
         // Show success message to confirm creation
         window.toastFrontendInfo(
-          "Tunnel created successfully",
-          "Tunnel Status"
+          "隧道创建成功",
+          "隧道状态"
         );
       }
     } catch (error) {
-      window.toastFrontendError("Error creating tunnel", "Tunnel Error");
+      window.toastFrontendError("创建隧道失败", "隧道错误");
       console.error("Error creating tunnel:", error);
     } finally {
       this.isLoading = false;
@@ -374,7 +373,7 @@ const model = {
       const createButton = document.querySelector("#tunnel-settings-section .tunnel-actions .btn-ok");
       if (createButton) {
         createButton.innerHTML =
-          '<span class="icon material-symbols-outlined">play_circle</span> Create Tunnel';
+          '<span class="icon material-symbols-outlined">play_circle</span> 创建隧道';
         createButton.disabled = false;
         createButton.classList.remove("creating");
       }
@@ -384,11 +383,11 @@ const model = {
   async stopTunnel() {
     if (
       confirm(
-        "Are you sure you want to stop the tunnel? The URL will no longer be accessible."
+        "您确定要停止隧道吗？URL 将不再可访问。"
       )
     ) {
       this.isLoading = true;
-      this.loadingText = "Stopping tunnel...";
+      this.loadingText = "正在停止隧道...";
 
       try {
         // Call the backend to stop the tunnel
@@ -418,11 +417,11 @@ const model = {
           this.linkGenerated = false;
 
           window.toastFrontendInfo(
-            "Tunnel stopped successfully",
-            "Tunnel Status"
+            "隧道已成功停止",
+            "隧道状态"
           );
         } else {
-          window.toastFrontendError("Failed to stop tunnel", "Tunnel Error");
+          window.toastFrontendError("停止隧道失败", "隧道错误");
 
           // Reset stop button
           stopButton.innerHTML = originalStopContent;
@@ -430,7 +429,7 @@ const model = {
           stopButton.classList.remove("stopping");
         }
       } catch (error) {
-        window.toastFrontendError("Error stopping tunnel", "Tunnel Error");
+        window.toastFrontendError("停止隧道失败", "隧道错误");
         console.error("Error stopping tunnel:", error);
 
         // Reset stop button
@@ -455,13 +454,13 @@ const model = {
       .then(() => {
         // Update button to show success state
         copyButton.innerHTML =
-          '<span class="icon material-symbols-outlined">check</span> Copied!';
+          '<span class="icon material-symbols-outlined">check</span> 已复制!';
         copyButton.classList.add("copy-success");
 
         // Show toast notification
         window.toastFrontendInfo(
-          "Tunnel URL copied to clipboard!",
-          "Clipboard"
+          "隧道 URL 已复制到剪贴板！",
+          "剪贴板"
         );
 
         // Reset button after 2 seconds
@@ -473,13 +472,13 @@ const model = {
       .catch((err) => {
         console.error("Failed to copy URL: ", err);
         window.toastFrontendError(
-          "Failed to copy tunnel URL",
-          "Clipboard Error"
+          "复制隧道 URL 失败",
+          "剪贴板错误"
         );
 
         // Show error state
         copyButton.innerHTML =
-          '<span class="icon material-symbols-outlined">close</span> Failed';
+          '<span class="icon material-symbols-outlined">close</span> 失败';
         copyButton.classList.add("copy-error");
 
         // Reset button after 2 seconds

@@ -56,7 +56,7 @@ const model = {
 
     } catch (error) {
       console.error("File browser error:", error);
-      this.error = error?.message || "Failed to load files";
+      this.error = error?.message || "加载文件失败";
       this.isLoading = false;
     }
   },
@@ -227,16 +227,16 @@ const model = {
           this.restoreScrollPosition(scrollPos);
         }
       } else {
-        const msg = data.error || "Error fetching files";
+        const msg = data.error || "获取文件失败";
         console.error("Error fetching files:", msg);
         this.browser.entries = [];
         this.isLoading = false;
-        window.toastFrontendError(msg, "File Browser Error");
+        window.toastFrontendError(msg, "文件浏览器错误");
       }
     } catch (e) {
       window.toastFrontendError(
-        "Error fetching files: " + e.message,
-        "File Browser Error"
+        "获取文件失败: " + e.message,
+        "文件浏览器错误"
       );
       this.browser.entries = [];
       this.isLoading = false;
@@ -309,7 +309,7 @@ const model = {
       return true;
     });
     if (duplicate) {
-      this.renameError = `An item named "${newName}" already exists.`;
+      this.renameError = `名为 "${newName}" 的项目已存在。`;
       return;
     }
 
@@ -340,16 +340,16 @@ const model = {
 
       const data = await resp.json().catch(() => ({}));
       if (!resp.ok || data.error) {
-        throw new Error(data.error || "Rename failed");
+        throw new Error(data.error || "重命名失败");
       }
 
       await this.fetchFiles(this.browser.currentPath);
       this.closeRenameModal();
     } catch (error) {
-      const message = error?.message || "Rename failed";
+      const message = error?.message || "重命名失败";
       this.renameError = message;
       const title =
-        this.renameMode === "create-folder" ? "Folder Error" : "Rename Error";
+        this.renameMode === "create-folder" ? "文件夹错误" : "重命名错误";
       window.toastFrontendError(message, title);
     } finally {
       this.isRenaming = false;
@@ -390,14 +390,14 @@ const model = {
         this.browser.entries = this.browser.entries.filter(
           (e) => e.path !== file.path
         );
-        window.toastFrontendSuccess("File deleted successfully", "File Deleted");
+        window.toastFrontendSuccess("文件已成功删除", "文件已删除");
       } else {
-        window.toastFrontendError(data.error || "Error deleting file", "Delete Error");
+        window.toastFrontendError(data.error || "删除文件失败", "删除错误");
       }
     } catch (e) {
       window.toastFrontendError(
-        "Error deleting file: " + e.message,
-        "File Delete Error"
+        "删除文件失败: " + e.message,
+        "文件删除错误"
       );
     }
   },
@@ -418,7 +418,7 @@ const model = {
           !["zip", "tar", "gz", "rar", "7z"].includes(ext) &&
           f.size > 100 * 1024 * 1024
         ) {
-          alert(`File ${f.name} exceeds 100MB limit.`);
+          alert(`文件 ${f.name} 超过 100MB 限制。`);
           continue;
         }
         formData.append("files[]", f);
@@ -436,15 +436,15 @@ const model = {
           const msg = data.failed
             .map((f) => `${f.name}: ${f.error}`)
             .join("\n");
-          alert(`Some files failed to upload:\n${msg}`);
+          alert(`部分文件上传失败:\n${msg}`);
         }
       } else {
-        alert(data.error || "Error uploading files");
+        alert(data.error || "上传文件失败");
       }
     } catch (e) {
       window.toastFrontendError(
-        "Error uploading files: " + e.message,
-        "File Upload Error"
+        "上传文件失败: " + e.message,
+        "文件上传错误"
       );
     } finally {
       event.target.value = ""; // reset input so same file can be reselected
@@ -467,7 +467,7 @@ window.openFileLink = async function (path) {
   try {
     const resp = await window.sendJsonData("/file_info", { path });
     if (!resp.exists) {
-      window.toastFrontendError("File does not exist.", "File Error");
+      window.toastFrontendError("文件不存在。", "文件错误");
       return;
     }
     if (resp.is_dir) {
@@ -478,8 +478,8 @@ window.openFileLink = async function (path) {
     }
   } catch (e) {
     window.toastFrontendError(
-      "Error opening file: " + e.message,
-      "File Open Error"
+      "打开文件失败: " + e.message,
+      "文件打开错误"
     );
   }
 };

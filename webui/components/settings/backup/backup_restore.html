@@ -1,21 +1,21 @@
 <html>
   <head>
-    <title>Backup & Restore</title>
+    <title>备份与恢复</title>
   </head>
 
   <body>
     <div x-data>
       <div>
-        <div class="section-title">Backup &amp; Restore</div>
+        <div class="section-title">备份与恢复</div>
         <div class="section-description">
-          Backup and restore Agent Zero data and configurations using glob pattern-based file selection.
+          使用基于 glob 模式的文件选择来备份和恢复 Agent Zero 数据和配置。
         </div>
 
         <div class="field">
           <div class="field-label">
-            <div class="field-title">Create Backup</div>
+            <div class="field-title">创建备份</div>
             <div class="field-description">
-              Create a backup archive of selected files and configurations using customizable patterns.
+              使用可自定义模式创建所选文件和配置的备份存档。
             </div>
           </div>
           <div class="field-control">
@@ -23,16 +23,16 @@
               class="btn btn-field"
               @click="$store.settings.handleFieldButton({ id: 'backup_create' })"
             >
-              Create Backup
+              创建备份
             </button>
           </div>
         </div>
 
         <div class="field">
           <div class="field-label">
-            <div class="field-title">Restore from Backup</div>
+            <div class="field-title">从备份恢复</div>
             <div class="field-description">
-              Restore files and configurations from a backup archive with pattern-based selection.
+              使用基于模式的选择从备份存档恢复文件和配置。
             </div>
           </div>
           <div class="field-control">
@@ -40,7 +40,7 @@
               class="btn btn-field"
               @click="$store.settings.handleFieldButton({ id: 'backup_restore' })"
             >
-              Restore Backup
+              恢复备份
             </button>
           </div>
         </div>

@@ -1,21 +1,21 @@
 <html>
   <head>
-    <title>Speech</title>
+    <title>语音</title>
   </head>
 
   <body>
     <div x-data>
       <template x-if="$store.settings.settings">
         <div>
-          <div class="section-title">Speech</div>
+          <div class="section-title">语音</div>
           <div class="section-description">
-            Voice transcription and speech synthesis settings.
+            语音转录和语音合成设置。
           </div>
 
           <div class="field field-full">
             <div class="field-label">
-              <div class="field-title">Microphone device</div>
-              <div class="field-description">Select the microphone device to use for speech-to-text.</div>
+              <div class="field-title">麦克风设备</div>
+              <div class="field-description">选择用于语音转文字的麦克风设备。</div>
             </div>
             <div class="field-control">
               <x-component path="/settings/speech/microphone.html"></x-component>
@@ -24,8 +24,8 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Speech-to-text model size</div>
-              <div class="field-description">Select the speech-to-text model size</div>
+              <div class="field-title">语音转文字模型大小</div>
+              <div class="field-description">选择语音转文字模型大小</div>
             </div>
             <div class="field-control">
               <select x-model="$store.settings.settings.stt_model_size">
@@ -38,8 +38,8 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Speech-to-text language code</div>
-              <div class="field-description">Language code (e.g. en, fr, it)</div>
+              <div class="field-title">语音转文字语言代码</div>
+              <div class="field-description">语言代码（如 en, fr, zh）</div>
             </div>
             <div class="field-control">
               <input type="text" x-model="$store.settings.settings.stt_language" />
@@ -48,8 +48,8 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Microphone silence threshold</div>
-              <div class="field-description">Silence detection threshold. Lower values are more sensitive to noise.</div>
+              <div class="field-title">麦克风静音阈值</div>
+              <div class="field-description">静音检测阈值。较低的值对噪音更敏感。</div>
             </div>
             <div class="field-control">
               <input type="range" min="0" max="1" step="0.01" x-model.number="$store.settings.settings.stt_silence_threshold" />
@@ -59,8 +59,8 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Microphone silence duration (ms)</div>
-              <div class="field-description">Duration of silence before the system considers speaking to have ended.</div>
+              <div class="field-title">麦克风静音时长 (ms)</div>
+              <div class="field-description">系统认为说话结束前的静音时长。</div>
             </div>
             <div class="field-control">
               <input type="number" x-model.number="$store.settings.settings.stt_silence_duration" />
@@ -69,8 +69,8 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Microphone waiting timeout (ms)</div>
-              <div class="field-description">Duration of silence before the system closes the microphone.</div>
+              <div class="field-title">麦克风等待超时 (ms)</div>
+              <div class="field-description">系统关闭麦克风前的静音时长。</div>
             </div>
             <div class="field-control">
               <input type="number" x-model.number="$store.settings.settings.stt_waiting_timeout" />
@@ -79,9 +79,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Enable Kokoro TTS</div>
+              <div class="field-title">启用 Kokoro TTS</div>
               <div class="field-description">
-                Enable higher quality server-side AI (Kokoro) instead of browser-based text-to-speech.
+                启用更高质量的服务端 AI（Kokoro）代替基于浏览器的文字转语音。
               </div>
             </div>
             <div class="field-control">

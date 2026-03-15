@@ -171,8 +171,8 @@ const model = {
         await this.openEditModal(response.data.name);
       } else {
         notifications.toastFrontendError(
-          response?.error || "Clone failed",
-          "Git Clone",
+          response?.error || "克隆失败",
+          "Git 克隆",
           5,
           "git_clone",
           notifications.NotificationPriority.NORMAL,
@@ -182,8 +182,8 @@ const model = {
     } catch (error) {
       console.error("Error cloning project:", error);
       notifications.toastFrontendError(
-        "Error cloning project: " + error,
-        "Git Clone",
+        "克隆项目失败: " + error,
+        "Git 克隆",
         5,
         "git_clone",
         notifications.NotificationPriority.NORMAL,
@@ -212,8 +212,8 @@ const model = {
       });
       if (response?.ok) {
         notifications.toastFrontendSuccess(
-          "Project activated successfully",
-          "Project activated",
+          "项目已成功激活",
+          "项目已激活",
           3,
           "projects",
           notifications.NotificationPriority.NORMAL,
@@ -221,8 +221,8 @@ const model = {
         );
       } else {
         notifications.toastFrontendWarning(
-          response?.error || "Project activation reported issues",
-          "Project activation",
+          response?.error || "项目激活报告问题",
+          "项目激活",
           5,
           "projects",
           notifications.NotificationPriority.NORMAL,
@@ -232,8 +232,8 @@ const model = {
     } catch (error) {
       console.error("Error activating project:", error);
       notifications.toastFrontendError(
-        "Error activating project: " + error,
-        "Error activating project",
+        "激活项目失败: " + error,
+        "激活项目失败",
         5,
         "projects",
         notifications.NotificationPriority.NORMAL,
@@ -251,8 +251,8 @@ const model = {
       });
       if (response?.ok) {
         notifications.toastFrontendSuccess(
-          "Project deactivated successfully",
-          "Project deactivated",
+          "项目已成功停用",
+          "项目已停用",
           3,
           "projects",
           notifications.NotificationPriority.NORMAL,
@@ -260,8 +260,8 @@ const model = {
         );
       } else {
         notifications.toastFrontendWarning(
-          response?.error || "Project deactivation reported issues",
-          "Project deactivated",
+          response?.error || "项目停用报告问题",
+          "项目停用",
           5,
           "projects",
           notifications.NotificationPriority.NORMAL,
@@ -271,8 +271,8 @@ const model = {
     } catch (error) {
       console.error("Error deactivating project:", error);
       notifications.toastFrontendError(
-        "Error deactivating project: " + error,
-        "Error deactivating project",
+        "停用项目失败: " + error,
+        "停用项目失败",
         5,
         "projects",
         notifications.NotificationPriority.NORMAL,
@@ -290,7 +290,7 @@ const model = {
   async deleteProject(name) {
     // show confirmation dialog before proceeding
     const confirmed = window.confirm(
-      "Are you sure you want to permanently delete this project? This action is irreversible and ALL FILES will be deleted."
+      "您确定要永久删除此项目吗？此操作不可撤销，所有文件都将被删除。"
     );
     if (!confirmed) return;
     try {
@@ -300,8 +300,8 @@ const model = {
       });
       if (response.ok) {
         notifications.toastFrontendSuccess(
-          "Project deleted successfully",
-          "Project deleted",
+          "项目已成功删除",
+          "项目已删除",
           3,
           "projects",
           notifications.NotificationPriority.NORMAL,
@@ -310,8 +310,8 @@ const model = {
         await this.loadProjectsList();
       } else {
         notifications.toastFrontendWarning(
-          response.error || "Project deletion blocked",
-          "Project delete",
+          response.error || "项目删除被阻止",
+          "删除项目",
           5,
           "projects",
           notifications.NotificationPriority.NORMAL,
@@ -321,8 +321,8 @@ const model = {
     } catch (error) {
       console.error("Error deleting project:", error);
       notifications.toastFrontendError(
-        "Error deleting project: " + error,
-        "Error deleting project",
+        "删除项目失败: " + error,
+        "删除项目失败",
         5,
         "projects",
         notifications.NotificationPriority.NORMAL,
@@ -364,8 +364,8 @@ const model = {
       // notifications
       if (response.ok) {
         notifications.toastFrontendSuccess(
-          "Project saved successfully",
-          "Project saved",
+          "项目已成功保存",
+          "项目已保存",
           3,
           "projects",
           notifications.NotificationPriority.NORMAL,
@@ -374,8 +374,8 @@ const model = {
         return response.data;
       } else {
         notifications.toastFrontendError(
-          response.error || "Error saving project",
-          "Error saving project",
+          response.error || "保存项目失败",
+          "保存项目失败",
           5,
           "projects",
           notifications.NotificationPriority.NORMAL,
@@ -386,8 +386,8 @@ const model = {
     } catch (error) {
       console.error("Error saving project:", error);
       notifications.toastFrontendError(
-        "Error saving project: " + error,
-        "Error saving project",
+        "保存项目失败: " + error,
+        "保存项目失败",
         5,
         "projects",
         notifications.NotificationPriority.NORMAL,
@@ -478,7 +478,7 @@ const model = {
       // finished notification
       shortcuts.frontendNotification({
         type: shortcuts.NotificationType.SUCCESS,
-        message: "Knowledge loaded successfully",
+        message: "知识加载成功",
         priority: shortcuts.NotificationPriority.NORMAL,
         displayTime: 2,
         group: "knowledge_load",
@@ -488,7 +488,7 @@ const model = {
       // error notification
       shortcuts.frontendNotification({
         type: shortcuts.NotificationType.ERROR,
-        message: "Error loading knowledge",
+        message: "加载知识失败",
         priority: shortcuts.NotificationPriority.NORMAL,
         displayTime: 5,
         group: "knowledge_load",
@@ -522,7 +522,7 @@ const model = {
       console.error("Error testing file structure:", error);
       shortcuts.frontendNotification({
         type: shortcuts.NotificationType.ERROR,
-        message: "Error testing file structure",
+        message: "测试文件结构失败",
         priority: shortcuts.NotificationPriority.NORMAL,
         displayTime: 3,
         frontendOnly: true,

@@ -7,9 +7,9 @@ const ACTION_ICON_MAP = {
 };
 
 const ACTION_LABELS = {
-  detail: "View details",
-  speak: "Speak",
-  copy: "Copy",
+  detail: "查看详情",
+  speak: "朗读",
+  copy: "复制",
 };
 
 function resolveActionIcon(icon) {

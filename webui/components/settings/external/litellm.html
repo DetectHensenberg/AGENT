@@ -7,16 +7,16 @@
     <div x-data="{ get settings() { return $store.settings.settings } }">
       <template x-if="settings">
         <div>
-          <div class="section-title">LiteLLM Global Settings</div>
+          <div class="section-title">LiteLLM 全局设置</div>
           <div class="section-description">
-            Configure global parameters passed to LiteLLM for all providers.
+            配置传递给所有提供商的 LiteLLM 全局参数。
           </div>
 
           <div class="field field-full">
             <div class="field-label">
-              <div class="field-title">LiteLLM global parameters</div>
+              <div class="field-title">LiteLLM 全局参数</div>
               <div class="field-description">
-                Global LiteLLM params (e.g. timeout, stream_timeout) in .env format: one KEY=VALUE per line. Example: <code>stream_timeout=30</code>. Applied to all LiteLLM calls unless overridden. See <a href='https://docs.litellm.ai/docs/set_keys' target='_blank'>LiteLLM</a> and <a href='https://docs.litellm.ai/docs/proxy/timeout' target='_blank'>timeouts</a>.
+                LiteLLM 全局参数（如 timeout, stream_timeout），格式为 .env：每行一个 KEY=VALUE。示例：<code>stream_timeout=30</code>。除非被覆盖，否则应用于所有 LiteLLM 调用。参见 <a href='https://docs.litellm.ai/docs/set_keys' target='_blank'>LiteLLM</a> 和 <a href='https://docs.litellm.ai/docs/proxy/timeout' target='_blank'>超时设置</a>。
               </div>
             </div>
             <div class="field-control">

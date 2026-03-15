@@ -135,12 +135,12 @@ const memoryDashboardStore = {
           this.selectedMemorySubdir = "default";
         }
       } else {
-        this.error = response.error || "Failed to load memory subdirectories";
+        this.error = response.error || "加载记忆子目录失败";
         this.memorySubdirs = ["default"];
         this.selectedMemorySubdir = "default";
       }
     } catch (error) {
-      this.error = error.message || "Failed to load memory subdirectories";
+      this.error = error.message || "加载记忆子目录失败";
       this.memorySubdirs = ["default"];
       // Only fallback to default if current selection is not available
       if (!this.memorySubdirs.includes(this.selectedMemorySubdir)) {
@@ -217,7 +217,7 @@ const memoryDashboardStore = {
         this.memoryInitialized[this.selectedMemorySubdir] = true;
       } else {
         if (!silent) {
-          this.error = response.error || "Failed to search memories";
+          this.error = response.error || "搜索记忆失败";
           this.memories = [];
           this.message = null;
         } else {
@@ -227,7 +227,7 @@ const memoryDashboardStore = {
       }
     } catch (error) {
       if (!silent) {
-        this.error = error.message || "Failed to search memories";
+        this.error = error.message || "搜索记忆失败";
         this.memories = [];
         this.message = null;
         console.error("Memory search error:", error);
@@ -334,7 +334,7 @@ const memoryDashboardStore = {
 
       if (response.success) {
         justToast(
-          `Successfully deleted ${selectedMemories.length} memories`,
+          `已成功删除 ${selectedMemories.length} 条记忆`,
           "success"
         );
 
@@ -343,12 +343,12 @@ const memoryDashboardStore = {
         await this.searchMemories(true); // silent refresh
       } else {
         justToast(
-          response.error || "Failed to delete selected memories",
+          response.error || "删除所选记忆失败",
           "error"
         );
       }
     } catch (error) {
-      justToast(error.message || "Failed to delete selected memories", "error");
+      justToast(error.message || "删除所选记忆失败", "error");
     } finally {
       this.loading = false;
     }
@@ -396,7 +396,7 @@ ${memory.content_full}
 
     this.copyToClipboard(content, false);
     justToast(
-      `Copied ${selectedMemories.length} memories with metadata to clipboard`,
+      `已复制 ${selectedMemories.length} 条记忆及元数据到剪贴板`,
       "success"
     );
   },
@@ -437,7 +437,7 @@ ${memory.content_full}
     URL.revokeObjectURL(url);
 
     justToast(
-      `Exported ${selectedMemories.length} selected memories to ${filename}`,
+      `已导出 ${selectedMemories.length} 条选中记忆到 ${filename}`,
       "success"
     );
   },
@@ -519,7 +519,7 @@ ${memory.content_full}
         .writeText(text)
         .then(() => {
           if(toastSuccess)
-            justToast("Copied to clipboard!", "success");
+            justToast("已复制到剪贴板！", "success");
         })
         .catch((err) => {
           console.error("Clipboard copy failed:", err);
@@ -542,10 +542,10 @@ ${memory.content_full}
     try {
       document.execCommand("copy");
       if(toastSuccess)
-        justToast("Copied to clipboard!", "success");
+        justToast("已复制到剪贴板！", "success");
     } catch (err) {
       console.error("Fallback clipboard copy failed:", err);
-      justToast("Failed to copy to clipboard", "error");
+      justToast("复制到剪贴板失败", "error");
     }
     document.body.removeChild(textArea);
   },
@@ -563,7 +563,7 @@ ${memory.content_full}
       });
 
       if (response.success) {
-        justToast("Memory deleted successfully", "success");
+        justToast("记忆已成功删除", "success");
 
         // If we were viewing this memory in detail modal, close it
         if (isViewingThisMemory) {
@@ -575,17 +575,17 @@ ${memory.content_full}
         // Trigger an immediate refresh to get updated state from backend
         await this.searchMemories(true); // silent refresh
       } else {
-        justToast(`Failed to delete memory: ${response.error}`, "error");
+        justToast(`删除记忆失败: ${response.error}`, "error");
       }
     } catch (error) {
       console.error("Memory deletion error:", error);
-      justToast("Failed to delete memory", "error");
+      justToast("删除记忆失败", "error");
     }
   },
 
   exportMemories() {
     if (this.memories.length === 0) {
-      justToast("No memories to export", "warning");
+      justToast("没有可导出的记忆", "warning");
       return;
     }
 
@@ -619,10 +619,10 @@ ${memory.content_full}
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      justToast("Memory export completed", "success");
+      justToast("记忆导出完成", "success");
     } catch (error) {
       console.error("Memory export error:", error);
-      justToast("Failed to export memories", "error");
+      justToast("导出记忆失败", "error");
     }
   },
 
@@ -682,17 +682,17 @@ ${memory.content_full}
       });
 
       if(response.success){
-        justToast("Memory updated successfully", "success");
+        justToast("记忆已成功更新", "success");
         await this.searchMemories(true); // silent refresh
       }else{
-        justToast(`Failed to update memory: ${response.error}`, "error");
+        justToast(`更新记忆失败: ${response.error}`, "error");
       }
 
       this.editMode = false;
       this.editMemoryBackup = null; // discard backup
     } catch (error) {
       console.error("Error confirming edit mode:", error);
-      justToast("Failed to save memory changes.", "error");
+      justToast("保存记忆更改失败。", "error");
     }
   },
 };

@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Memory Details</title>
+    <title>记忆详情</title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
                               :style="`background-color: ${$store.memoryDashboardStore.getAreaColor($store.memoryDashboardStore.detailMemory?.area)}`"
                               x-text="$store.memoryDashboardStore.detailMemory?.area?.toUpperCase() || 'UNKNOWN'"></span>
                         <span class="timestamp-text" x-text="$store.memoryDashboardStore.formatTimestamp($store.memoryDashboardStore.detailMemory?.timestamp, true)"></span>
-                        <span class="source-text" x-text="$store.memoryDashboardStore.detailMemory?.knowledge_source ? 'Knowledge' : 'Conversation'"></span>
+                        <span class="source-text" x-text="$store.memoryDashboardStore.detailMemory?.knowledge_source ? '知识' : '对话'"></span>
                     </div>
                     <div class="header-actions">
                         <!-- View Mode Buttons -->
@@ -23,20 +23,20 @@
                             <div style="display: flex; gap: 0.5rem;">
                                 
                                 <button class="btn btn-action-header copy-all" @click="$store.memoryDashboardStore.copyToClipboard($store.memoryDashboardStore.formatMemoryForCopy($store.memoryDashboardStore.detailMemory))"
-                                        title="Copy Complete Memory with Metadata">
-                                    <span class="material-symbols-outlined">copy_all</span> All
+                                        title="复制完整记忆及元数据">
+                                    <span class="material-symbols-outlined">copy_all</span> 全部
                                 </button>
                                 <button class="btn btn-action-header copy-content" @click="$store.memoryDashboardStore.copyToClipboard($store.memoryDashboardStore.detailMemory?.content_full)"
-                                        title="Copy Content Only">
-                                    <span class="material-symbols-outlined">content_copy</span> Content
+                                        title="仅复制内容">
+                                    <span class="material-symbols-outlined">content_copy</span> 内容
                                 </button>
                                 <div style="width:2em"></div>
                                 <button class="btn btn-action-header edit" @click="$store.memoryDashboardStore.enableEditMode()"
-                                        title="Edit Memory">
+                                        title="编辑记忆">
                                     <span class="material-symbols-outlined">edit_document</span>
                                 </button>
                                 <button class="btn btn-action-header delete danger" @click="$confirmClick($event, () => $store.memoryDashboardStore.deleteMemory($store.memoryDashboardStore.detailMemory))"
-                                        title="Delete Memory">
+                                        title="删除记忆">
                                     <span class="material-symbols-outlined">delete</span>
                                 </button>
                             </div>
@@ -45,11 +45,11 @@
                         <template x-if="$store.memoryDashboardStore.editMode">
                             <div style="display: flex; gap: 0.5rem;">
                                 <button class="btn btn-action-header cancel" @click="$store.memoryDashboardStore.cancelEditMode()"
-                                        title="Cancel Edit">
+                                        title="取消编辑">
                                     <span class="material-symbols-outlined">close</span>
                                 </button>
                                 <button class="btn btn-action-header confirm" @click="$store.memoryDashboardStore.confirmEditMode()"
-                                        title="Confirm Changes">
+                                        title="确认更改">
                                     <span class="material-symbols-outlined">check</span>
                                 </button>
 
@@ -63,7 +63,7 @@
                     <!-- Main Content Section -->
                     <div class="content-section-main">
                         <div class="content-block">
-                            <h4>Memory Content</h4>
+                            <h4>记忆内容</h4>
                             <template x-if="!$store.memoryDashboardStore.editMode">
                                 <div class="memory-content-display">
                                     <p x-text="$store.memoryDashboardStore.detailMemory?.content_full"></p>
@@ -76,7 +76,7 @@
 
                         <!-- Tags Section -->
                         <div class="content-block" x-show="$store.memoryDashboardStore.detailMemory?.tags && $store.memoryDashboardStore.detailMemory.tags.length > 0">
-                            <h4>Tags</h4>
+                            <h4>标签</h4>
                             <div class="tags-display">
                                 <template x-for="tag in $store.memoryDashboardStore.detailMemory?.tags || []" :key="tag">
                                     <span class="tag-display" x-text="tag"></span>
@@ -87,36 +87,36 @@
 
                     <!-- Metadata Sidebar -->
                     <div class="metadata-sidebar no-scrollbar">
-                        <h4>Metadata</h4>
+                        <h4>元数据</h4>
 
                         <!-- Basic Info -->
                         <div class="metadata-group">
                             <div class="metadata-item">
-                                <span class="metadata-label">ID:</span>
+                                <span class="metadata-label">ID：</span>
                                 <span class="metadata-value" x-text="$store.memoryDashboardStore.detailMemory?.id || 'N/A'"></span>
                             </div>
                             <div class="metadata-item">
-                                <span class="metadata-label">Area:</span>
+                                <span class="metadata-label">区域：</span>
                                 <span class="metadata-value" x-text="$store.memoryDashboardStore.detailMemory?.area || 'N/A'"></span>
                             </div>
                             <div class="metadata-item">
-                                <span class="metadata-label">Source:</span>
-                                <span class="metadata-value" x-text="$store.memoryDashboardStore.detailMemory?.knowledge_source ? 'Knowledge' : 'Conversation'"></span>
+                                <span class="metadata-label">来源：</span>
+                                <span class="metadata-value" x-text="$store.memoryDashboardStore.detailMemory?.knowledge_source ? '知识' : '对话'"></span>
                             </div>
                         </div>
 
                         <!-- Timestamps -->
                         <div class="metadata-group">
-                            <h5>Timestamps</h5>
+                            <h5>时间戳</h5>
                             <div class="metadata-item">
-                                <span class="metadata-label">Created:</span>
+                                <span class="metadata-label">创建时间：</span>
                                 <span class="metadata-value" x-text="$store.memoryDashboardStore.formatTimestamp($store.memoryDashboardStore.detailMemory?.timestamp, false)"></span>
                             </div>
                         </div>
 
                         <!-- Source Information -->
                         <div class="metadata-group" x-show="$store.memoryDashboardStore.detailMemory?.source_file">
-                            <h5>Source File</h5>
+                            <h5>源文件</h5>
                             <div class="metadata-item">
                                 <span class="metadata-value source-file-display" x-text="$store.memoryDashboardStore.detailMemory?.source_file"></span>
                             </div>
@@ -124,7 +124,7 @@
 
                         <!-- All Custom Metadata -->
                         <div class="metadata-group" x-show="$store.memoryDashboardStore.detailMemory?.metadata && Object.keys($store.memoryDashboardStore.detailMemory.metadata).length > 0">
-                            <h5>Raw Metadata</h5>
+                            <h5>原始元数据</h5>
                             <template x-for="[key, value] in Object.entries($store.memoryDashboardStore.detailMemory?.metadata || {})" :key="key">
                                 <div class="metadata-item">
                                     <span class="metadata-label" x-text="key + ':'"></span>

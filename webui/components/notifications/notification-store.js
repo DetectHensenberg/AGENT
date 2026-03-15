@@ -335,11 +335,11 @@ const model = {
     const diffHours = diffMs / 3600000;
     const diffDays = diffMs / 86400000;
 
-    if (diffMins < 0.15) return "Just now";
-    else if (diffMins < 1) return "Less than a minute ago";
-    else if (diffMins < 60) return `${Math.round(diffMins)}m ago`;
-    else if (diffHours < 24) return `${Math.round(diffHours)}h ago`;
-    else if (diffDays < 7) return `${Math.round(diffDays)}d ago`;
+    if (diffMins < 0.15) return "刚刚";
+    else if (diffMins < 1) return "不到一分钟前";
+    else if (diffMins < 60) return `${Math.round(diffMins)} 分钟前`;
+    else if (diffHours < 24) return `${Math.round(diffHours)} 小时前`;
+    else if (diffDays < 7) return `${Math.round(diffDays)} 天前`;
 
     return date.toLocaleDateString();
   },
@@ -661,7 +661,7 @@ const model = {
   // NEW: Convenience methods for frontend notifications (updated to use new backend-first logic)
   async frontendError(
     message,
-    title = "Connection Error",
+    title = "连接错误",
     display_time = 8,
     group = "",
     priority = defaultPriority,
@@ -680,7 +680,7 @@ const model = {
 
   async frontendWarning(
     message,
-    title = "Warning",
+    title = "警告",
     display_time = 5,
     group = "",
     priority = defaultPriority,
@@ -699,7 +699,7 @@ const model = {
 
   async frontendInfo(
     message,
-    title = "Info",
+    title = "信息",
     display_time = 3,
     group = "",
     priority = defaultPriority,
@@ -718,7 +718,7 @@ const model = {
 
   async frontendSuccess(
     message,
-    title = "Success",
+    title = "成功",
     display_time = 3,
     group = "",
     priority = defaultPriority,
@@ -737,7 +737,7 @@ const model = {
 
   async frontendProgress(
     message,
-    title = "Progress",
+    title = "进度",
     display_time = 3,
     group = "",
     priority = defaultPriority,

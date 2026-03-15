@@ -116,13 +116,13 @@ export async function sendMessage() {
       // Handle response
       const jsonResponse = await response.json();
       if (!jsonResponse) {
-        toast("No response returned.", "error");
+        toast("未返回响应。", "error");
       } else {
         setContext(jsonResponse.context);
       }
     }
   } catch (e) {
-    toastFetchError("Error sending message", e); // Will use new notification system
+    toastFetchError("发送消息失败", e); // Will use new notification system
   }
 }
 globalThis.sendMessage = sendMessage;
@@ -141,7 +141,7 @@ globalThis.forceScrollChatToBottom = forceScrollChatToBottom;
 export function toastFetchError(text, error) {
   console.error(text, error);
   // Use new frontend error notification system (async, but we don't need to wait)
-  const errorMessage = error?.message || error?.toString() || "Unknown error";
+  const errorMessage = error?.message || error?.toString() || "未知错误";
 
   if (getConnectionStatus()) {
     // Backend is connected, just show the error
@@ -151,8 +151,8 @@ export function toastFetchError(text, error) {
   } else {
     // Backend is disconnected, show connection error
     toastFrontendError(
-      `${text} (backend appears to be disconnected): ${errorMessage}`,
-      "Connection Error"
+      `${text}（后端似乎已断开连接）: ${errorMessage}`,
+      "连接错误"
     ).catch((e) => console.error("Failed to show connection error toast:", e));
   }
 }
@@ -584,14 +584,14 @@ export function toast(text, type = "info", timeout = 5000) {
   // Use new frontend notification system based on type
   switch (type.toLowerCase()) {
     case "error":
-      return notificationStore.frontendError(text, "Error", display_time);
+      return notificationStore.frontendError(text, "错误", display_time);
     case "success":
-      return notificationStore.frontendInfo(text, "Success", display_time);
+      return notificationStore.frontendInfo(text, "成功", display_time);
     case "warning":
-      return notificationStore.frontendWarning(text, "Warning", display_time);
+      return notificationStore.frontendWarning(text, "警告", display_time);
     case "info":
     default:
-      return notificationStore.frontendInfo(text, "Info", display_time);
+      return notificationStore.frontendInfo(text, "信息", display_time);
   }
 }
 globalThis.toast = toast;

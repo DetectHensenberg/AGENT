@@ -77,13 +77,13 @@ const model = {
       });
       const result = await response.json().catch(() => ({}));
       if (!result.ok) {
-        this.error = result.error || "Failed to load skills";
+        this.error = result.error || "加载技能失败";
         this.skills = [];
         return;
       }
       this.skills = Array.isArray(result.data) ? result.data : [];
     } catch (e) {
-      this.error = e?.message || "Failed to load skills";
+      this.error = e?.message || "加载技能失败";
       this.skills = [];
     } finally {
       this.loading = false;
@@ -103,16 +103,16 @@ const model = {
       });
       const result = await response.json().catch(() => ({}));
       if (!result.ok) {
-        throw new Error(result.error || "Delete failed");
+        throw new Error(result.error || "删除失败");
       }
       if (window.toastFrontendSuccess) {
-        window.toastFrontendSuccess("Skill deleted", "Skills");
+        window.toastFrontendSuccess("技能已删除", "技能");
       }
       await this.loadSkills();
     } catch (e) {
-      const msg = e?.message || "Delete failed";
+      const msg = e?.message || "删除失败";
       if (window.toastFrontendError) {
-        window.toastFrontendError(msg, "Skills");
+        window.toastFrontendError(msg, "技能");
       }
     }
   },

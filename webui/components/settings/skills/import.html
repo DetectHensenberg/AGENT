@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Import Skills</title>
+    <title>导入技能</title>
     <script type="module">
         import { store } from "/components/settings/skills/skills-import-store.js";
     </script>
@@ -10,25 +10,25 @@
         <template x-if="$store.skillsImportStore">
             <div x-init="$store.skillsImportStore.init()" x-destroy="$store.skillsImportStore.onClose()">
 
-                <h3>Import Skills (SKILL.md)</h3>
+                <h3>导入技能 (SKILL.md)</h3>
 
                 <div class="upload-section">
                     <label for="skills-file" class="upload-label">
-                        Select Skills Pack (.zip)
+                        选择技能包 (.zip)
                     </label>
                     <input type="file" id="skills-file" accept=".zip"
                         @change="$store.skillsImportStore.handleFileUpload($event)">
                     <div class="upload-hint">
-                        Upload a repository/archive that contains SKILL.md skill folders (see agentskills.io).
+                        上传包含 SKILL.md 技能文件夹的仓库/存档（参见 agentskills.io）。
                     </div>
                 </div>
 
                 <div class="options" x-show="$store.skillsImportStore.skillsFile">
                     <label class="policy-label">
-                        <span class="policy-label-text">Limit to project:</span>
+                        <span class="policy-label-text">限制到项目：</span>
                         <select x-model="$store.skillsImportStore.projectKey" class="policy-dropdown"
                             @change="$store.skillsImportStore.previewImport()">
-                            <option value="">All</option>
+                            <option value="">全部</option>
                             <template x-for="project in $store.skillsImportStore.projects" :key="project.key">
                                 <option :value="project.key" x-text="project.label"></option>
                             </template>
@@ -36,10 +36,10 @@
                     </label>
 
                     <label class="policy-label">
-                        <span class="policy-label-text">Limit to agent profile:</span>
+                        <span class="policy-label-text">限制到代理配置：</span>
                         <select x-model="$store.skillsImportStore.agentProfileKey" class="policy-dropdown"
                             @change="$store.skillsImportStore.previewImport()">
-                            <option value="">All</option>
+                            <option value="">全部</option>
                             <template x-for="agentProfile in $store.skillsImportStore.agentProfiles" :key="agentProfile.key">
                                 <option :value="agentProfile.key" x-text="agentProfile.label"></option>
                             </template>
@@ -47,32 +47,32 @@
                     </label>
 
                     <label class="policy-label">
-                        <span class="policy-label-text">Namespace:</span>
-                        <input class="text-input" type="text" placeholder="e.g. my-pack"
+                        <span class="policy-label-text">命名空间：</span>
+                        <input class="text-input" type="text" placeholder="如 my-pack"
                             x-model="$store.skillsImportStore.namespace"
                             @change="$store.skillsImportStore.previewImport()">
                     </label>
 
                     <label class="policy-label">
-                        <span class="policy-label-text">Conflict policy:</span>
+                        <span class="policy-label-text">冲突策略：</span>
                         <select x-model="$store.skillsImportStore.conflict" class="policy-dropdown"
                             @change="$store.skillsImportStore.previewImport()">
-                            <option value="skip">Skip existing</option>
-                            <option value="rename">Rename (add _2, _3...)</option>
-                            <option value="overwrite">Overwrite existing</option>
+                            <option value="skip">跳过现有</option>
+                            <option value="rename">重命名（添加 _2, _3...）</option>
+                            <option value="overwrite">覆盖现有</option>
                         </select>
                     </label>
 
                     <div class="buttons">
                         <button class="btn slim" @click="$store.skillsImportStore.previewImport()"
-                            :disabled="$store.skillsImportStore.loading">Preview</button>
+                            :disabled="$store.skillsImportStore.loading">预览</button>
                         <button class="btn slim primary" @click="$store.skillsImportStore.performImport()"
-                            :disabled="$store.skillsImportStore.loading">Import</button>
+                            :disabled="$store.skillsImportStore.loading">导入</button>
                     </div>
                 </div>
 
                 <div x-show="$store.skillsImportStore.loading" class="loading">
-                    <span x-text="$store.skillsImportStore.loadingMessage || 'Processing...'"></span>
+                    <span x-text="$store.skillsImportStore.loadingMessage || '处理中...'"></span>
                 </div>
 
                 <div x-show="$store.skillsImportStore.error" class="error">
@@ -80,11 +80,11 @@
                 </div>
 
                 <div x-show="$store.skillsImportStore.preview" class="preview">
-                    <h4>Preview</h4>
+                    <h4>预览</h4>
                     <div class="preview-meta">
-                        <div>Namespace: <code x-text="$store.skillsImportStore.preview?.namespace"></code></div>
-                        <div>Would import: <span x-text="$store.skillsImportStore.preview?.imported_count || 0"></span></div>
-                        <div>Would skip: <span x-text="$store.skillsImportStore.preview?.skipped_count || 0"></span></div>
+                        <div>命名空间：<code x-text="$store.skillsImportStore.preview?.namespace"></code></div>
+                        <div>将导入：<span x-text="$store.skillsImportStore.preview?.imported_count || 0"></span></div>
+                        <div>将跳过：<span x-text="$store.skillsImportStore.preview?.skipped_count || 0"></span></div>
                     </div>
 
                     <textarea class="preview-list" readonly
@@ -92,13 +92,13 @@
                 </div>
 
                 <div x-show="$store.skillsImportStore.result" class="result">
-                    <h4>Import Complete</h4>
+                    <h4>导入完成</h4>
                     <div class="preview-meta">
-                        <div>Imported: <span x-text="$store.skillsImportStore.result?.imported_count || 0"></span></div>
-                        <div>Skipped: <span x-text="$store.skillsImportStore.result?.skipped_count || 0"></span></div>
+                        <div>已导入：<span x-text="$store.skillsImportStore.result?.imported_count || 0"></span></div>
+                        <div>已跳过：<span x-text="$store.skillsImportStore.result?.skipped_count || 0"></span></div>
                     </div>
                     <div class="note">
-                        Skills are indexed automatically. If you don’t see them immediately, use the Restart button in the left pane.
+                        技能会自动索引。如果没有立即看到，请使用左侧窗格中的重启按钮。
                     </div>
                 </div>
 

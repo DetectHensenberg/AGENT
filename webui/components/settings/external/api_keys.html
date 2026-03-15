@@ -1,16 +1,16 @@
 <html>
   <head>
-    <title>API Keys</title>
+    <title>API 密钥</title>
   </head>
 
   <body>
     <div x-data>
       <template x-if="$store.settings.settings">
         <div>
-          <div class="section-title">API Keys</div>
+          <div class="section-title">API 密钥</div>
           <div class="section-description">
-            API keys for model providers and services used by Agent Zero. You can set multiple API keys separated by a comma (,). They will be used in round-robin fashion.<br>
-            For more information about Agent Zero Venice provider, see <a href="http://agent-zero.ai/?community/api-dashboard/about" target="_blank">Agent Zero Venice</a>.
+            Agent Zero 使用的模型提供商和服务的 API 密钥。您可以设置多个 API 密钥，用逗号 (,) 分隔。它们将以轮询方式使用。<br>
+            有关 Agent Zero Venice 提供商的更多信息，请参见 <a href="http://agent-zero.ai/?community/api-dashboard/about" target="_blank">Agent Zero Venice</a>。
           </div>
 
           <template x-for="provider in $store.settings.apiKeyProviders" :key="provider.value">

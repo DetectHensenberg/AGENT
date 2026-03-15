@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Notifications</title>
+    <title>通知</title>
     <script type="module">
         import { store } from "/components/notifications/notification-store.js";
     </script>
@@ -16,8 +16,8 @@
                     <div class="notification-header-actions">
                         <button class="notification-action" @click="$store.notificationStore?.clearAll()"
                             :disabled="!$store.notificationStore || $store.notificationStore.getDisplayNotifications().length === 0"
-                            title="Clear All">
-                            <span class="material-symbols-outlined">delete</span> Clear All
+                            title="清除全部">
+                            <span class="material-symbols-outlined">delete</span> 清除全部
                         </button>
                     </div>
                 </div>
@@ -47,9 +47,9 @@
                                 <!-- Expand Toggle Button (as last row element) -->
                                 <button class="notification-expand-toggle" x-show="notification.detail"
                                     @click.stop="expanded = !expanded"
-                                    :title="expanded ? 'Collapse Details' : 'Expand Details'">
-                                    <span x-show="!expanded">▶ Show Details</span>
-                                    <span x-show="expanded">▼ Hide Details</span>
+                                    :title="expanded ? '收起详情' : '展开详情'">
+                                    <span x-show="!expanded">▶ 显示详情</span>
+                                    <span x-show="expanded">▼ 隐藏详情</span>
                                 </button>
 
                                 <!-- Expandable Detail Content -->
@@ -73,7 +73,7 @@
                     <div class="notification-empty-icon">
                         <span class="material-symbols-outlined">notifications</span>
                     </div>
-                    <p>No notifications to display</p>
+                    <p>没有通知</p>
                 </div>
             </div>
         </template>

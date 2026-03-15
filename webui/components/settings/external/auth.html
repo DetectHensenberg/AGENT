@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Authentication</title>
+    <title>身份验证</title>
   </head>
 
   <body>
@@ -12,15 +12,15 @@
     >
       <template x-if="settings">
         <div>
-          <div class="section-title">Authentication</div>
+          <div class="section-title">身份验证</div>
           <div class="section-description">
-            Settings for authentication to use Agent Zero Web UI.
+            使用 Agent Zero Web UI 的身份验证设置。
           </div>
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">UI Login</div>
-              <div class="field-description">Set user name for web UI</div>
+              <div class="field-title">UI 登录名</div>
+              <div class="field-description">设置 Web UI 的用户名</div>
             </div>
             <div class="field-control">
               <input type="text" x-model="settings.auth_login" />
@@ -29,8 +29,8 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">UI Password</div>
-              <div class="field-description">Set user password for web UI</div>
+              <div class="field-title">UI 密码</div>
+              <div class="field-description">设置 Web UI 的用户密码</div>
             </div>
             <div class="field-control">
               <input type="password" autocomplete="off" x-model="settings.auth_password" />
@@ -40,9 +40,9 @@
           <template x-if="additional.is_dockerized">
             <div class="field">
               <div class="field-label">
-                <div class="field-title">root Password</div>
+                <div class="field-title">root 密码</div>
                 <div class="field-description">
-                  Change linux root password in docker container. This password can be used for SSH access. Original password was randomly generated during setup.
+                  更改 Docker 容器中的 Linux root 密码。此密码可用于 SSH 访问。原始密码在设置时随机生成。
                 </div>
               </div>
               <div class="field-control">

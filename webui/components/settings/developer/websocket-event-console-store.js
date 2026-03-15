@@ -118,8 +118,8 @@ const model = {
 
       if (notify) {
         notificationStore.frontendInfo(
-          "WebSocket diagnostics capture enabled",
-          "Event Console",
+          "WebSocket 诊断捕获已启用",
+          "事件控制台",
           4,
         );
       }
@@ -171,8 +171,8 @@ const model = {
 
     if (notify) {
       notificationStore.frontendInfo(
-        "WebSocket diagnostics capture disabled",
-        "Event Console",
+        "WebSocket 诊断捕获已禁用",
+        "事件控制台",
         3,
       );
     }
@@ -190,9 +190,9 @@ const model = {
   },
 
   handleError(error) {
-    const message = error?.message || String(error || "Unknown error");
+    const message = error?.message || String(error || "未知错误");
     this.lastError = message;
-    notificationStore.frontendError(message, "WebSocket Event Console", 6);
+    notificationStore.frontendError(message, "WebSocket 事件控制台", 6);
   },
 
   addEntry(envelope) {

@@ -1,21 +1,21 @@
 <html>
   <head>
-    <title>Utility Model</title>
+    <title>工具模型</title>
   </head>
 
   <body>
     <div x-data>
       <template x-if="$store.settings.settings">
         <div>
-          <div class="section-title">Utility model</div>
+          <div class="section-title">工具模型</div>
           <div class="section-description">
-            Smaller, cheaper, faster model for handling utility tasks like organizing memory, preparing prompts, summarizing.
+            更小、更便宜、更快的模型，用于处理工具任务，如组织记忆、准备提示词、摘要等。
           </div>
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Utility model provider</div>
-              <div class="field-description">Select provider for utility model used by the framework</div>
+              <div class="field-title">工具模型提供商</div>
+              <div class="field-description">选择框架使用的工具模型提供商</div>
             </div>
             <div class="field-control">
               <select x-model="$store.settings.settings.util_model_provider">
@@ -28,8 +28,8 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Utility model name</div>
-              <div class="field-description">Exact name of model from selected provider</div>
+              <div class="field-title">工具模型名称</div>
+              <div class="field-description">所选提供商的确切模型名称</div>
             </div>
             <div class="field-control">
               <input type="text" x-model="$store.settings.settings.util_model_name" />
@@ -38,8 +38,8 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">API key</div>
-              <div class="field-description">API key for the selected utility model provider</div>
+              <div class="field-title">API 密钥</div>
+              <div class="field-description">所选工具模型提供商的 API 密钥</div>
             </div>
             <div class="field-control">
               <input
@@ -52,9 +52,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Utility model API base URL</div>
+              <div class="field-title">工具模型 API 基础 URL</div>
               <div class="field-description">
-                API base URL for utility model. Leave empty for default. Only relevant for Azure, local and custom (other) providers.
+                工具模型的 API 基础 URL。留空则使用默认值。仅对 Azure、本地和自定义（其他）提供商有效。
               </div>
             </div>
             <div class="field-control">
@@ -64,9 +64,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Requests per minute limit</div>
+              <div class="field-title">每分钟请求数限制</div>
               <div class="field-description">
-                Limits the number of requests per minute to the utility model. Waits if the limit is exceeded. Set to 0 to disable rate limiting.
+                限制每分钟对工具模型的请求数。超过限制时会等待。设为 0 可禁用速率限制。
               </div>
             </div>
             <div class="field-control">
@@ -76,9 +76,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Input tokens per minute limit</div>
+              <div class="field-title">每分钟输入 token 数限制</div>
               <div class="field-description">
-                Limits the number of input tokens per minute to the utility model. Waits if the limit is exceeded. Set to 0 to disable rate limiting.
+                限制每分钟对工具模型的输入 token 数。超过限制时会等待。设为 0 可禁用速率限制。
               </div>
             </div>
             <div class="field-control">
@@ -88,9 +88,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Output tokens per minute limit</div>
+              <div class="field-title">每分钟输出 token 数限制</div>
               <div class="field-description">
-                Limits the number of output tokens per minute to the utility model. Waits if the limit is exceeded. Set to 0 to disable rate limiting.
+                限制每分钟对工具模型的输出 token 数。超过限制时会等待。设为 0 可禁用速率限制。
               </div>
             </div>
             <div class="field-control">
@@ -100,9 +100,9 @@
 
           <div class="field field-full">
             <div class="field-label">
-              <div class="field-title">Utility model additional parameters</div>
+              <div class="field-title">工具模型附加参数</div>
               <div class="field-description">
-                Any other parameters supported by <a href='https://docs.litellm.ai/docs/set_keys' target='_blank'>LiteLLM</a>. Format is KEY=VALUE on individual lines, like .env file. Value can also contain JSON objects - when unquoted, it is treated as object, number etc., when quoted, it is treated as string.
+                <a href='https://docs.litellm.ai/docs/set_keys' target='_blank'>LiteLLM</a> 支持的其他参数。格式为每行 KEY=VALUE，类似 .env 文件。值也可以包含 JSON 对象 - 未加引号时视为对象、数字等，加引号时视为字符串。
               </div>
             </div>
             <div class="field-control">

@@ -126,7 +126,7 @@ const model = {
         this.tts_kokoro = settings.tts_kokoro ?? this.tts_kokoro;
       }
     } catch (error) {
-      window.toastFetchError("Failed to load speech settings", error);
+      window.toastFetchError("加载语音设置失败", error);
       console.error("Failed to load speech settings:", error);
     }
   },
@@ -724,7 +724,7 @@ class MicrophoneInput {
       return true;
     } catch (error) {
       console.error("Microphone initialization error:", error);
-      toast("Failed to access microphone. Please check permissions.", "error");
+      toast("无法访问麦克风。请检查权限。", "error");
       return false;
     }
   }
@@ -889,7 +889,7 @@ class MicrophoneInput {
         await this.updateCallback(result.text, true);
       }
     } catch (error) {
-      window.toastFetchError("Transcription error", error);
+      window.toastFetchError("转录错误", error);
       console.error("Transcription error:", error);
     } finally {
       this.audioChunks = [];

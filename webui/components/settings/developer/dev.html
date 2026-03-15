@@ -1,22 +1,22 @@
 <html>
   <head>
-    <title>Development</title>
+    <title>开发</title>
   </head>
 
   <body>
     <div x-data>
       <template x-if="$store.settings.settings">
         <div>
-          <div class="section-title">Development</div>
+          <div class="section-title">开发</div>
           <div class="section-description">
-            Parameters for A0 framework development. RFCs (remote function calls) are used to call functions on another A0 instance. You can develop and debug A0 natively on your local system while redirecting some functions to A0 instance in docker. This is crucial for development as A0 needs to run in standardized environment to support all features.
+            A0 框架开发参数。RFC（远程函数调用）用于在另一个 A0 实例上调用函数。您可以在本地系统上原生开发和调试 A0，同时将某些函数重定向到 Docker 中的 A0 实例。这对开发至关重要，因为 A0 需要在标准化环境中运行以支持所有功能。
           </div>
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Shell Interface</div>
+              <div class="field-title">Shell 接口</div>
               <div class="field-description">
-                Terminal interface used for Code Execution Tool. Local Python TTY works locally in both dockerized and development environments. SSH always connects to dockerized environment (automatically at localhost or RFC host address).
+                代码执行工具使用的终端接口。本地 Python TTY 在 Docker 化和开发环境中都可本地工作。SSH 始终连接到 Docker 化环境（自动使用 localhost 或 RFC 主机地址）。
               </div>
             </div>
             <div class="field-control">
@@ -32,9 +32,9 @@
             <div>
               <div class="field">
                 <div class="field-label">
-                  <div class="field-title">RFC Destination URL</div>
+                  <div class="field-title">RFC 目标 URL</div>
                   <div class="field-description">
-                    URL of dockerized A0 instance for remote function calls. Do not specify port here.
+                    用于远程函数调用的 Docker 化 A0 实例 URL。请勿在此处指定端口。
                   </div>
                 </div>
                 <div class="field-control">
@@ -46,9 +46,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">RFC Password</div>
+              <div class="field-title">RFC 密码</div>
               <div class="field-description">
-                Password for remote function calls. Passwords must match on both instances. RFCs can not be used with empty password.
+                远程函数调用的密码。两个实例的密码必须匹配。空密码无法使用 RFC。
               </div>
             </div>
             <div class="field-control">
@@ -60,8 +60,8 @@
             <div>
               <div class="field">
                 <div class="field-label">
-                  <div class="field-title">RFC HTTP port</div>
-                  <div class="field-description">HTTP port for dockerized instance of A0.</div>
+                  <div class="field-title">RFC HTTP 端口</div>
+                  <div class="field-description">Docker 化 A0 实例的 HTTP 端口。</div>
                 </div>
                 <div class="field-control">
                   <input type="number" x-model.number="$store.settings.settings.rfc_port_http" />
@@ -70,8 +70,8 @@
 
               <div class="field">
                 <div class="field-label">
-                  <div class="field-title">RFC SSH port</div>
-                  <div class="field-description">SSH port for dockerized instance of A0.</div>
+                  <div class="field-title">RFC SSH 端口</div>
+                  <div class="field-description">Docker 化 A0 实例的 SSH 端口。</div>
                 </div>
                 <div class="field-control">
                   <input type="number" x-model.number="$store.settings.settings.rfc_port_ssh" />
@@ -82,9 +82,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Broadcast server restart event</div>
+              <div class="field-title">广播服务器重启事件</div>
               <div class="field-description">
-                Emit a fire-and-forget <code>server_restart</code> broadcast to clients after the server starts.
+                服务器启动后向客户端发送即发即忘的 <code>server_restart</code> 广播。
               </div>
             </div>
             <div class="field-control">
@@ -97,9 +97,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Enable uvicorn access logs</div>
+              <div class="field-title">启用 uvicorn 访问日志</div>
               <div class="field-description">
-                Temporarily enable uvicorn access logs for debugging WebSocket transport issues (default off).
+                临时启用 uvicorn 访问日志以调试 WebSocket 传输问题（默认关闭）。
               </div>
               <template
                 x-if="$store.settings.additional?.runtime_settings &&
@@ -107,7 +107,7 @@
                     $store.settings.additional.runtime_settings.uvicorn_access_logs_enabled"
               >
                 <div class="field-description">
-                  Applies after backend restart.
+                  后端重启后生效。
                 </div>
               </template>
             </div>
@@ -121,16 +121,16 @@
 
           <template x-if="!$store.settings.additional?.is_dockerized">
             <div>
-              <div class="section-title">Testing</div>
+              <div class="section-title">测试</div>
               <div class="section-description">
-                Utilities for validating WebSocket infrastructure in development environments.
+                用于在开发环境中验证 WebSocket 基础设施的工具。
               </div>
 
               <div class="field">
                 <div class="field-label">
-                  <div class="field-title">WebSocket Test Harness</div>
+                  <div class="field-title">WebSocket 测试工具</div>
                   <div class="field-description">
-                    Open the developer harness to run automated and manual WebSocket validation suites.
+                    打开开发者工具以运行自动化和手动 WebSocket 验证套件。
                   </div>
                 </div>
                 <div class="field-control">
@@ -138,16 +138,16 @@
                     class="btn btn-field"
                     @click="openModal('settings/developer/websocket-tester.html');"
                   >
-                    Open Harness
+                    打开工具
                   </button>
                 </div>
               </div>
 
               <div class="field">
                 <div class="field-label">
-                  <div class="field-title">WebSocket Event Console</div>
+                  <div class="field-title">WebSocket 事件控制台</div>
                   <div class="field-description">
-                    Inspect inbound and outbound envelopes and lifecycle events in real time (development only).
+                    实时检查入站和出站信封以及生命周期事件（仅开发环境）。
                   </div>
                 </div>
                 <div class="field-control">
@@ -155,7 +155,7 @@
                     class="btn btn-field"
                     @click="openModal('settings/developer/websocket-event-console.html');"
                   >
-                    Open Console
+                    打开控制台
                   </button>
                 </div>
               </div>

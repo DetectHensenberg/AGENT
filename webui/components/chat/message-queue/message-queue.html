@@ -10,13 +10,13 @@
       <div class="queue-preview">
         <div class="queue-header">
           <span class="queue-title">
-            Queued Messages (<span x-text="$store.messageQueue.count"></span>)
+            排队消息 (<span x-text="$store.messageQueue.count"></span>)
           </span>
           <div class="queue-header-actions">
-            <button class="queue-header-btn" @click="$store.messageQueue.sendAll()" title="Send all">
+            <button class="queue-header-btn" @click="$store.messageQueue.sendAll()" title="全部发送">
               <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
             </button>
-            <button class="queue-header-btn delete" @click="$store.messageQueue.clearQueue()" title="Clear all">
+            <button class="queue-header-btn delete" @click="$store.messageQueue.clearQueue()" title="清除全部">
               <span class="material-symbols-outlined">delete_sweep</span>
             </button>
           </div>
@@ -46,10 +46,10 @@
                 </template>
               </div>
               <div class="queue-item-actions">
-                <button class="queue-action-btn send" @click="$store.messageQueue.sendItem(item.id)" title="Send now">
+                <button class="queue-action-btn send" @click="$store.messageQueue.sendItem(item.id)" title="立即发送">
                   <span class="material-symbols-outlined">send</span>
                 </button>
-                <button class="queue-action-btn delete" @click="$store.messageQueue.removeItem(item.id)" title="Remove">
+                <button class="queue-action-btn delete" @click="$store.messageQueue.removeItem(item.id)" title="移除">
                   <span class="material-symbols-outlined">close</span>
                 </button>
               </div>

@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>List Skills</title>
+    <title>技能列表</title>
     <script type="module">
         import { store } from "/components/settings/skills/skills-list-store.js";
     </script>
@@ -10,18 +10,18 @@
         <template x-if="$store.skillsListStore">
             <div x-init="$store.skillsListStore.init()" x-destroy="$store.skillsListStore.onClose()">
 
-                <div class="section-title">List Skills</div>
+                <div class="section-title">技能列表</div>
                 <div class="section-description">
-                    Browse skills across global and project scopes. Duplicates are shown individually.
+                    浏览全局和项目范围内的技能。重复项会单独显示。
                 </div>
 
                 <div class="skills-toolbar">
                     <div class="skills-toolbar-row">
                         <label class="skills-toolbar-item">
-                            <span class="skills-toolbar-label">Project</span>
+                            <span class="skills-toolbar-label">项目</span>
                             <select x-model="$store.skillsListStore.projectName"
                                 @change="$store.skillsListStore.loadSkills()">
-                                <option value="">All</option>
+                                <option value="">全部</option>
                                 <template x-for="project in $store.skillsListStore.projects" :key="project.key">
                                     <option :value="project.key" x-text="project.label"></option>
                                 </template>
@@ -29,10 +29,10 @@
                         </label>
 
                         <label class="skills-toolbar-item">
-                            <span class="skills-toolbar-label">Agent profile</span>
+                            <span class="skills-toolbar-label">代理配置</span>
                             <select x-model="$store.skillsListStore.agentProfileKey"
                                 @change="$store.skillsListStore.loadSkills()">
-                                <option value="">All</option>
+                                <option value="">全部</option>
                                 <template x-for="agentProfile in $store.skillsListStore.agentProfiles" :key="agentProfile.key">
                                     <option :value="agentProfile.key" x-text="agentProfile.label"></option>
                                 </template>
@@ -40,17 +40,17 @@
                         </label>
 
                         <div class="skills-toolbar-actions">
-                            <button type="button" class="button confirm" title="Refresh"
+                            <button type="button" class="button confirm" title="刷新"
                                 @click="$store.skillsListStore.loadSkills()"
                                 :disabled="$store.skillsListStore.loading">
-                                <span class="icon material-symbols-outlined">refresh</span> Refresh
+                                <span class="icon material-symbols-outlined">refresh</span> 刷新
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <div x-show="$store.skillsListStore.loading" class="loading">
-                    <span>Loading skills...</span>
+                    <span>正在加载技能...</span>
                 </div>
 
                 <div x-show="$store.skillsListStore.error" class="error">
@@ -59,7 +59,7 @@
 
                 <template
                     x-if="!$store.skillsListStore.loading && !$store.skillsListStore.error && $store.skillsListStore.skills.length === 0">
-                    <div class="skills-empty">No skills found.</div>
+                    <div class="skills-empty">未找到技能。</div>
                 </template>
 
                 <div class="skills-list">
@@ -67,21 +67,21 @@
                         <div class="skill-card">
                             <div class="skill-header">
                                 <div class="skill-heading">
-                                    <div class="skill-title" x-text="skill.name || '(unnamed skill)'"></div>
+                                    <div class="skill-title" x-text="skill.name || '(未命名技能)'"></div>
                                     <code class="skill-path" x-text="skill.path"></code>
                                 </div>
                                 <div class="skill-actions">
-                                    <button type="button" class="button" title="Open in browser"
+                                    <button type="button" class="button" title="在浏览器中打开"
                                         @click="$store.skillsListStore.openSkill(skill)">
-                                        <span class="icon material-symbols-outlined">folder_open</span> Open
+                                        <span class="icon material-symbols-outlined">folder_open</span> 打开
                                     </button>
-                                    <button type="button" class="button cancel icon-button" title="Delete"
+                                    <button type="button" class="button cancel icon-button" title="删除"
                                         @click="$confirmClick($event, () => $store.skillsListStore.deleteSkill(skill))">
                                         <span class="icon material-symbols-outlined">delete</span>
                                     </button>
                                 </div>
                             </div>
-                            <div class="skill-description" x-text="skill.description || 'No description provided.'"></div>
+                            <div class="skill-description" x-text="skill.description || '未提供描述。'"></div>
                         </div>
                     </template>
                 </div>

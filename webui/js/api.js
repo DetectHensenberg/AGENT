@@ -175,7 +175,7 @@ export async function getCsrfToken() {
       return csrfToken;
     } else {
       if (json.error) alert(json.error);
-      throw new Error(json.error || "Failed to get CSRF token");
+      throw new Error(json.error || "获取 CSRF 令牌失败");
     }
   })();
 

@@ -49,7 +49,7 @@ const model = {
   // Copy text to clipboard with toast feedback
   copyToClipboard(text) {
     navigator.clipboard.writeText(text)
-      .then(() => notificationStore.addFrontendToastOnly("success", "Copied to clipboard!", "", 3))
+      .then(() => notificationStore.addFrontendToastOnly("success", "已复制到剪贴板！", "", 3))
       .catch((err) => console.error("Clipboard copy failed:", err));
   },
 

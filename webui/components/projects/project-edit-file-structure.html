@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Create a new project</title>
+    <title>文件结构</title>
     <script type="module">
         import { store } from "/components/projects/projects-store.js";
     </script>
@@ -19,10 +19,8 @@
 
                 <div class="projects-setting-row" style="padding: 1rem 0;">
                     <div class="projects-setting-text">
-                        <label class="projects-form-label">Inject project structure into context window</label>
-                        <span class="projects-form-description">When turned on, the project file structure will be
-                            injected into the context window of the agent. This is useful for agents that need to
-                            have an overview of project folders and files at all times.</span>
+                        <label class="projects-form-label">将项目结构注入上下文窗口</label>
+                        <span class="projects-form-description">开启后，项目文件结构将被注入代理的上下文窗口。这对于需要始终了解项目文件夹和文件概览的代理很有用。</span>
                     </div>
                     <div class="projects-setting-control">
                         <label class="toggle">
@@ -36,57 +34,48 @@
 
 
                     <div class="projects-form-group">
-                        <label class="projects-form-label">Max Depth</label>
-                        <span class="projects-form-description">Set the maximum depth for the file structure (0 =
-                            unlimited).</span>
+                        <label class="projects-form-label">最大深度</label>
+                        <span class="projects-form-description">设置文件结构的最大深度（0 = 无限制）。</span>
                         <input type="number" class="projects-form-input"
                             x-model.number="$store.projects.selectedProject.file_structure.max_depth" min="0" step="1"
                             placeholder="0">
                     </div>
 
                     <div class="projects-form-group">
-                        <label class="projects-form-label">Max Lines</label>
-                        <span class="projects-form-description">Maximum total lines outputted for the agent. This limits
-                            the
-                            space occupied in the context window (0 = unlimited).</span>
+                        <label class="projects-form-label">最大行数</label>
+                        <span class="projects-form-description">输出给代理的最大总行数。这限制了在上下文窗口中占用的空间（0 = 无限制）。</span>
                         <input type="number" class="projects-form-input"
                             x-model.number="$store.projects.selectedProject.file_structure.max_lines" min="0" step="1"
                             placeholder="0">
                     </div>
 
                     <div class="projects-form-group">
-                        <label class="projects-form-label">Max Folders</label>
-                        <span class="projects-form-description">Maximum number of subfolders to display under one folder
-                            (0 =
-                            unlimited).</span>
+                        <label class="projects-form-label">最大文件夹数</label>
+                        <span class="projects-form-description">一个文件夹下显示的最大子文件夹数（0 = 无限制）。</span>
                         <input type="number" class="projects-form-input"
                             x-model.number="$store.projects.selectedProject.file_structure.max_folders" min="0" step="1"
                             placeholder="0">
                     </div>
 
                     <div class="projects-form-group">
-                        <label class="projects-form-label">Max Files</label>
-                        <span class="projects-form-description">Maximum number of files to display under one folder (0 =
-                            unlimited).</span>
+                        <label class="projects-form-label">最大文件数</label>
+                        <span class="projects-form-description">一个文件夹下显示的最大文件数（0 = 无限制）。</span>
                         <input type="number" class="projects-form-input"
                             x-model.number="$store.projects.selectedProject.file_structure.max_files" min="0" step="1"
                             placeholder="0">
                     </div>
 
                     <div class="projects-form-group">
-                        <label class="projects-form-label">Ignored files / folders</label>
-                        <span class="projects-form-description">Specify patterns in gitignore format. These files and
-                            folders will be skipped during analysis, such as meta folders, cache directories, packages,
-                            and
-                            build artifacts.</span>
+                        <label class="projects-form-label">忽略的文件/文件夹</label>
+                        <span class="projects-form-description">以 gitignore 格式指定模式。这些文件和文件夹将在分析时被跳过，例如元数据文件夹、缓存目录、包和构建产物。</span>
                         <textarea class="projects-form-textarea"
                             x-model="$store.projects.selectedProject.file_structure.gitignore" rows="5"
-                            placeholder="Enter gitignore patterns (e.g., node_modules/, .git/, *.log)"></textarea>
+                            placeholder="输入 gitignore 模式（例如 node_modules/, .git/, *.log）"></textarea>
                     </div>
 
                     <button class="button icon-button" x-on:click="$store.projects.testFileStructure()">
                         <span class="icon material-symbols-outlined">account_tree</span>
-                        <span>Test output</span>
+                        <span>测试输出</span>
                     </button>
 
 

@@ -426,6 +426,7 @@ class Memory:
     @staticmethod
     def _save_db_file(db: MyFaiss, memory_subdir: str):
         abs_dir = abs_db_dir(memory_subdir)
+        os.makedirs(abs_dir, exist_ok=True)
         db.save_local(folder_path=abs_dir)
 
     @staticmethod

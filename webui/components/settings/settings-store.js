@@ -63,8 +63,8 @@ const model = {
       }
     } catch (e) {
       console.error("Failed to load settings:", e);
-      this.error = e.message || "Failed to load settings";
-      toast("Failed to load settings", "error");
+      this.error = e.message || "加载设置失败";
+      toast("加载设置失败", "error");
     } finally {
       this.isLoading = false;
     }
@@ -113,7 +113,7 @@ const model = {
   // Save settings
   async saveSettings() {
     if (!this.settings) {
-      toast("No settings to save", "warning");
+      toast("没有要保存的设置", "warning");
       return false;
     }
 
@@ -123,7 +123,7 @@ const model = {
       if (response && response.settings) {
         this.settings = response.settings;
         this.additional = response.additional || this.additional;
-        toast("Settings saved successfully", "success");
+        toast("设置已成功保存", "success");
         document.dispatchEvent(
           new CustomEvent("settings-updated", { detail: response.settings })
         );
@@ -133,7 +133,7 @@ const model = {
       }
     } catch (e) {
       console.error("Failed to save settings:", e);
-      toast("Failed to save settings: " + e.message, "error");
+      toast("保存设置失败：" + e.message, "error");
       return false;
     } finally {
       this.isLoading = false;
@@ -168,7 +168,7 @@ const model = {
       window.openModal("settings/agent/workdir-file-structure-test.html");
     } catch (e) {
       console.error("Error testing workdir file structure:", e);
-      toast("Error testing workdir file structure", "error");
+      toast("测试工作目录文件结构失败", "error");
     }
   },
 

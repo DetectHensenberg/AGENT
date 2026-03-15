@@ -13,29 +13,29 @@
             <!-- Filter Header -->
             <div class="filters-header">
                 <div class="filter-group-inline filter-type">
-                    <label>Type</label>
+                    <label>类型</label>
                     <select x-model="$store.schedulerStore.filterType">
-                        <option value="all">All Types</option>
-                        <option value="scheduled">Scheduled</option>
-                        <option value="adhoc">Ad-hoc</option>
-                        <option value="planned">Planned</option>
+                        <option value="all">所有类型</option>
+                        <option value="scheduled">定时</option>
+                        <option value="adhoc">临时</option>
+                        <option value="planned">计划</option>
                     </select>
                 </div>
 
                 <div class="filter-group-inline filter-state">
-                    <label>State</label>
+                    <label>状态</label>
                     <select x-model="$store.schedulerStore.filterState">
-                        <option value="all">All States</option>
-                        <option value="idle">Idle</option>
-                        <option value="running">Running</option>
-                        <option value="disabled">Disabled</option>
-                        <option value="error">Error</option>
+                        <option value="all">所有状态</option>
+                        <option value="idle">空闲</option>
+                        <option value="running">运行中</option>
+                        <option value="disabled">已禁用</option>
+                        <option value="error">错误</option>
                     </select>
                 </div>
 
                 <button class="btn btn-ok btn-new-task" @click="$store.schedulerStore.startCreateTask()">
                     <span class="material-symbols-outlined">add</span>
-                    New Task
+                    新建任务
                 </button>
             </div>
 
@@ -44,33 +44,33 @@
                 <div class="status-info">
                     <span class="status-item">
                         <span class="material-symbols-outlined">schedule</span>
-                        Total: <strong x-text="$store.schedulerStore.tasks.length"></strong>
+                        总计：<strong x-text="$store.schedulerStore.tasks.length"></strong>
                     </span>
                     <span class="status-separator">•</span>
                     <span class="status-item">
-                        Filtered: <strong x-text="$store.schedulerStore.filteredTasks.length"></strong>
+                        已筛选：<strong x-text="$store.schedulerStore.filteredTasks.length"></strong>
                     </span>
                 </div>
 
                 <!-- Pagination -->
                 <div class="status-pagination" x-show="$store.schedulerStore.totalPages > 1">
                     <button class="btn btn-icon" @click="$store.schedulerStore.prevPage()"
-                        :disabled="$store.schedulerStore.currentPage === 1" title="Previous Page">
+                        :disabled="$store.schedulerStore.currentPage === 1" title="上一页">
                         <span class="material-symbols-outlined">chevron_left</span>
                     </button>
                     <div class="page-input-group">
-                        <label>Page</label>
+                        <label>页码</label>
                         <input type="number" class="page-input"
                             x-model.number="$store.schedulerStore.currentPage"
                             @change="$store.schedulerStore.goToPage($store.schedulerStore.currentPage)"
                             @keyup.enter="$store.schedulerStore.goToPage($store.schedulerStore.currentPage)"
                             :min="1" :max="$store.schedulerStore.totalPages" />
-                        <span class="page-total">of <strong
+                        <span class="page-total">共 <strong
                                 x-text="$store.schedulerStore.totalPages"></strong></span>
                     </div>
                     <button class="btn btn-icon" @click="$store.schedulerStore.nextPage()"
                         :disabled="$store.schedulerStore.currentPage === $store.schedulerStore.totalPages"
-                        title="Next Page">
+                        title="下一页">
                         <span class="material-symbols-outlined">chevron_right</span>
                     </button>
                 </div>
@@ -79,10 +79,10 @@
             <!-- Empty State -->
             <div class="data-empty-state"
                  x-show="!$store.schedulerStore.isLoading && $store.schedulerStore.filteredTasks.length === 0">
-                <div>No tasks found</div>
+                <div>未找到任务</div>
                 <button class="btn btn-ok" @click="$store.schedulerStore.startCreateTask()">
                     <span class="material-symbols-outlined">add</span>
-                    Create your first task
+                    创建第一个任务
                 </button>
             </div>
 
@@ -93,25 +93,25 @@
                     <thead>
                     <tr>
                         <th class="col-name sortable" @click="$store.schedulerStore.changeSort('name')">
-                            Name
+                            名称
                             <span class="sort-indicator"
                                   x-show="$store.schedulerStore.sortField === 'name'"
                                   :class="{'desc': $store.schedulerStore.sortDirection === 'desc'}">↑</span>
                         </th>
                         <th class="col-state sortable" @click="$store.schedulerStore.changeSort('state')">
-                            State
+                            状态
                             <span class="sort-indicator"
                                   x-show="$store.schedulerStore.sortField === 'state'"
                                   :class="{'desc': $store.schedulerStore.sortDirection === 'desc'}">↑</span>
                         </th>
-                        <th class="col-project">Project</th>
+                        <th class="col-project">项目</th>
                         <th class="col-lastrun sortable" @click="$store.schedulerStore.changeSort('last_run')">
-                            Last Run
+                            上次运行
                             <span class="sort-indicator"
                                   x-show="$store.schedulerStore.sortField === 'last_run'"
                                   :class="{'desc': $store.schedulerStore.sortDirection === 'desc'}">↑</span>
                         </th>
-                        <th class="col-actions">Actions</th>
+                        <th class="col-actions">操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -134,19 +134,19 @@
                             <td class="col-actions" @click.stop>
                                 <div class="actions-wrapper">
                                     <button class="btn btn-action"
-                                            @click="$store.schedulerStore.runTask(task.uuid)" title="Run Task">
+                                            @click="$store.schedulerStore.runTask(task.uuid)" title="运行任务">
                                         <span class="material-symbols-outlined">play_arrow</span>
                                     </button>
                                     <button class="btn btn-action"
-                                            @click="$store.schedulerStore.resetTaskState(task.uuid)" title="Reset State">
+                                            @click="$store.schedulerStore.resetTaskState(task.uuid)" title="重置状态">
                                         <span class="material-symbols-outlined">refresh</span>
                                     </button>
                                     <button class="btn btn-action"
-                                            @click="$store.schedulerStore.startEditTask(task.uuid)" title="Edit Task">
+                                            @click="$store.schedulerStore.startEditTask(task.uuid)" title="编辑任务">
                                         <span class="material-symbols-outlined">edit</span>
                                     </button>
                                     <button class="btn btn-action delete"
-                                            @click="$confirmClick($event, () => $store.schedulerStore.deleteTask(task.uuid))" title="Delete Task">
+                                            @click="$confirmClick($event, () => $store.schedulerStore.deleteTask(task.uuid))" title="删除任务">
                                         <span class="material-symbols-outlined">delete</span>
                                     </button>
                                 </div>
@@ -163,32 +163,32 @@
                 <div class="status-info">
                     <span class="status-item">
                         <span class="material-symbols-outlined">schedule</span>
-                        Total: <strong x-text="$store.schedulerStore.tasks.length"></strong>
+                        总计：<strong x-text="$store.schedulerStore.tasks.length"></strong>
                     </span>
                     <span class="status-separator">•</span>
                     <span class="status-item">
-                        Filtered: <strong x-text="$store.schedulerStore.filteredTasks.length"></strong>
+                        已筛选：<strong x-text="$store.schedulerStore.filteredTasks.length"></strong>
                     </span>
                 </div>
 
                 <div class="status-pagination">
                     <button class="btn btn-icon" @click="$store.schedulerStore.prevPage()"
-                        :disabled="$store.schedulerStore.currentPage === 1" title="Previous Page">
+                        :disabled="$store.schedulerStore.currentPage === 1" title="上一页">
                         <span class="material-symbols-outlined">chevron_left</span>
                     </button>
                     <div class="page-input-group">
-                        <label>Page</label>
+                        <label>页码</label>
                         <input type="number" class="page-input"
                             x-model.number="$store.schedulerStore.currentPage"
                             @change="$store.schedulerStore.goToPage($store.schedulerStore.currentPage)"
                             @keyup.enter="$store.schedulerStore.goToPage($store.schedulerStore.currentPage)"
                             :min="1" :max="$store.schedulerStore.totalPages" />
-                        <span class="page-total">of <strong
+                        <span class="page-total">共 <strong
                                 x-text="$store.schedulerStore.totalPages"></strong></span>
                     </div>
                     <button class="btn btn-icon" @click="$store.schedulerStore.nextPage()"
                         :disabled="$store.schedulerStore.currentPage === $store.schedulerStore.totalPages"
-                        title="Next Page">
+                        title="下一页">
                         <span class="material-symbols-outlined">chevron_right</span>
                     </button>
                 </div>

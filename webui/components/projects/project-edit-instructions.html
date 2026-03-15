@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Create a new project</title>
+    <title>项目指令</title>
     <script type="module">
         import { store } from "/components/projects/projects-store.js";
     </script>
@@ -17,32 +17,30 @@
                     </div> -->
 
                 <div class="projects-form-group">
-                    <label class="projects-form-label">Description</label>
-                    <span class="projects-form-description">Describe the project. This helps both you and the agent
-                        understand the project context.</span>
+                    <label class="projects-form-label">描述</label>
+                    <span class="projects-form-description">描述项目。这有助于您和代理理解项目上下文。</span>
                     <textarea class="projects-form-textarea" x-model="$store.projects.selectedProject.description"
-                        rows="5" placeholder="Enter project description"></textarea>
+                        rows="5" placeholder="输入项目描述"></textarea>
                 </div>
 
                 <div class="projects-form-group">
-                    <label class="projects-form-label">Instructions</label>
-                    <span class="projects-form-description">Provide specific instructions for the agent related to this
-                        project.</span>
+                    <label class="projects-form-label">指令</label>
+                    <span class="projects-form-description">为代理提供与此项目相关的具体指令。</span>
                     <textarea class="projects-form-textarea"
                         x-model="$store.projects.selectedProject.instructions" rows="15"
-                        placeholder="Enter project instructions"></textarea>
+                        placeholder="输入项目指令"></textarea>
                 </div>
 
                 <div class="projects-form-group">
-                    <label class="projects-form-label">Instruction files</label>
+                    <label class="projects-form-label">指令文件</label>
                     <div class="projects-input-with-button-wrapper">
-                        <span class="projects-form-description">Additional instruction files in <strong><span
-                                    x-text="$store.projects.getSelectedAbsPath('.a0proj','instructions')"></span></strong>. Only text files are currently supported (txt, md, yaml, no PDFs or images).</span>
-                        <span class="projects-form-description">Currently there are <strong><span
-                                    x-text="$store.projects.selectedProject.instruction_files_count || 0"></span></strong> instruction files.</span>
+                        <span class="projects-form-description">额外的指令文件位于 <strong><span
+                                    x-text="$store.projects.getSelectedAbsPath('.a0proj','instructions')"></span></strong>。目前仅支持文本文件（txt、md、yaml，不支持 PDF 或图片）。</span>
+                        <span class="projects-form-description">目前有 <strong><span
+                                    x-text="$store.projects.selectedProject.instruction_files_count || 0"></span></strong> 个指令文件。</span>
                         <button class="button icon-button" x-on:click="$store.projects.browseInstructionFiles()">
                             <span class="icon material-symbols-outlined">folder</span>
-                            <span>Browse</span>
+                            <span>浏览</span>
                         </button>
                     </div>
                 </div>

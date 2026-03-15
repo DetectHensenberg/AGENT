@@ -50,7 +50,7 @@ const model = {
       this.editor.navigateFileStart();
     } catch (error) {
       console.error("Failed to format JSON:", error);
-      alert("Invalid JSON: " + error.message);
+      alert("无效的 JSON: " + error.message);
     }
   },
 

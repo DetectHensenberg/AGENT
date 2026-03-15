@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Settings</title>
+  <title>设置</title>
 </head>
 
 <body>
@@ -15,14 +15,14 @@
       <!-- Loading state -->
       <div x-show="$store.settings.isLoading && !$store.settings.settings" class="settings-loading">
         <span class="material-symbols-outlined spinning">progress_activity</span>
-        <span>Loading settings...</span>
+        <span>正在加载设置...</span>
       </div>
 
       <!-- Error state -->
       <div x-show="$store.settings.error && !$store.settings.settings" class="settings-error">
         <span class="material-symbols-outlined">error</span>
         <span x-text="$store.settings.error"></span>
-        <button class="btn btn-retry" @click="$store.settings.onOpen()">Retry</button>
+        <button class="btn btn-retry" @click="$store.settings.onOpen()">重试</button>
       </div>
 
       <!-- Settings content -->
@@ -33,15 +33,15 @@
             <div class="settings-tab"
                  :class="{'active': $store.settings.activeTab === 'agent'}"
                  @click="$store.settings.switchTab('agent')"
-                 title="Agent Settings">Agent Settings</div>
+                 title="代理设置">代理设置</div>
             <div class="settings-tab"
                  :class="{'active': $store.settings.activeTab === 'skills'}"
                  @click="$store.settings.switchTab('skills')"
-                 title="Skills">Skills</div>
+                 title="技能">技能</div>
             <div class="settings-tab"
                  :class="{'active': $store.settings.activeTab === 'external'}"
                  @click="$store.settings.switchTab('external')"
-                 title="External Services">External Services</div>
+                 title="外部服务">外部服务</div>
             <div class="settings-tab" 
                  :class="{'active': $store.settings.activeTab === 'mcp'}"
                  @click="$store.settings.switchTab('mcp')" 
@@ -49,11 +49,11 @@
             <div class="settings-tab" 
                  :class="{'active': $store.settings.activeTab === 'developer'}"
                  @click="$store.settings.switchTab('developer')" 
-                 title="Developer">Developer</div>
+                 title="开发者">开发者</div>
             <div class="settings-tab"
                  :class="{'active': $store.settings.activeTab === 'backup'}"
                  @click="$store.settings.switchTab('backup')"
-                 title="Backup & Restore">Backup & Restore</div>
+                 title="备份与恢复">备份与恢复</div>
           </div>
         </div>
 
@@ -85,11 +85,11 @@
         <button class="btn btn-ok" 
             @click="$store.settings.saveAndClose()"
             :disabled="$store.settings?.isLoading">
-        Save
+        保存
         </button>
         <button class="btn btn-cancel" 
                 @click="$store.settings.closeSettings()">
-          Cancel
+          取消
         </button>
       </div>
 

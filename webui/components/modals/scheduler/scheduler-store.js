@@ -594,7 +594,7 @@ const schedulerStoreModel = {
     try {
       const { ok, error, tasks } = await schedulerApi.listTasks();
       if (!ok) {
-        if (manual) this.notifyError(`Failed to fetch tasks: ${error}`);
+        if (manual) this.notifyError(`获取任务失败: ${error}`);
         this.tasks = [];
         this.hasNoTasks = true;
         return;
@@ -616,7 +616,7 @@ const schedulerStoreModel = {
 
       this.hasNoTasks = this.tasks.length === 0;
     } catch (error) {
-      if (manual) this.notifyError(`Failed to fetch tasks: ${error.message}`);
+      if (manual) this.notifyError(`获取任务失败: ${error.message}`);
       this.tasks = [];
       this.hasNoTasks = true;
     } finally {
@@ -626,12 +626,12 @@ const schedulerStoreModel = {
 
   async saveTask() {
     if (!this.editingTask.name?.trim() || !this.editingTask.prompt?.trim()) {
-      window.alert("Task name and prompt are required");
+      window.alert("任务名称和提示词为必填项");
       return;
     }
 
     if (!TASK_TYPES.includes(this.editingTask.type)) {
-      window.alert("Invalid task type");
+      window.alert("无效的任务类型");
       return;
     }
 
@@ -653,8 +653,8 @@ const schedulerStoreModel = {
       }
 
       const message = this.isCreating
-        ? "Task created successfully"
-        : "Task updated successfully";
+        ? "任务创建成功"
+        : "任务更新成功";
       this.notifySuccess(message);
 
       if (result.task) {
@@ -669,7 +669,7 @@ const schedulerStoreModel = {
         await this.fetchTasks({ manual: true });
       }
     } catch (error) {
-      this.notifyError(`Failed to save task: ${error.message}`);
+      this.notifyError(`保存任务失败: ${error.message}`);
       return;
     } finally {
       this.destroyFlatpickr("all");
@@ -684,7 +684,7 @@ const schedulerStoreModel = {
       const result = await schedulerApi.runTask(taskId);
       if (!result.ok) throw new Error(result.error);
       const warning = result.data?.warning;
-      const message = result.data?.message || "Task started successfully";
+      const message = result.data?.message || "任务已成功启动";
       if (warning) {
         this.notifyWarning(warning);
       } else {
@@ -692,18 +692,18 @@ const schedulerStoreModel = {
       }
       this.fetchTasks({ manual: true });
     } catch (error) {
-      this.notifyError(`Failed to run task: ${error.message}`);
+      this.notifyError(`运行任务失败: ${error.message}`);
     }
   },
 
   async resetTaskState(taskId) {
     const task = this.tasks.find((t) => t.uuid === taskId);
     if (!task) {
-      this.notifyError("Task not found");
+      this.notifyError("未找到任务");
       return;
     }
     if (task.state === "idle") {
-      this.notifyInfo("Task is already in idle state");
+      this.notifyInfo("任务已处于空闲状态");
       return;
     }
 
@@ -711,10 +711,10 @@ const schedulerStoreModel = {
     try {
       const result = await schedulerApi.updateTask({ task_id: taskId, state: "idle" });
       if (!result.ok) throw new Error(result.error);
-      this.notifySuccess("Task state reset to idle");
+      this.notifySuccess("任务状态已重置为空闲");
       await this.fetchTasks({ manual: true });
     } catch (error) {
-      this.notifyError(`Failed to reset task state: ${error.message}`);
+      this.notifyError(`重置任务状态失败: ${error.message}`);
     } finally {
       this.showLoadingState = false;
     }
@@ -732,14 +732,14 @@ const schedulerStoreModel = {
     try {
       const result = await schedulerApi.deleteTask(taskId);
       if (!result.ok) throw new Error(result.error);
-      this.notifySuccess("Task deleted successfully");
+      this.notifySuccess("任务已成功删除");
       this.tasks = this.tasks.filter((task) => task.uuid !== taskId);
       this.hasNoTasks = this.tasks.length === 0;
       if (this.selectedTaskForDetail?.uuid === taskId) {
         this.closeTaskDetail();
       }
     } catch (error) {
-      this.notifyError(`Failed to delete task: ${error.message}`);
+      this.notifyError(`删除任务失败: ${error.message}`);
     }
   },
 
@@ -969,7 +969,7 @@ const schedulerStoreModel = {
     
     const task = this.tasks.find((t) => t.uuid === taskId);
     if (!task) {
-      this.notifyError("Task not found");
+      this.notifyError("未找到任务");
       return;
     }
 
@@ -1030,7 +1030,7 @@ const schedulerStoreModel = {
   async startEditTask(taskId) {
     const task = this.tasks.find((t) => t.uuid === taskId);
     if (!task) {
-      this.notifyError("Task not found");
+      this.notifyError("未找到任务");
       return;
     }
 
@@ -1069,7 +1069,7 @@ const schedulerStoreModel = {
 
     const selectedDate = readDateFromPlannerInput(input);
     if (!selectedDate) {
-      window.alert("Please select a valid date and time");
+      window.alert("请选择有效的日期和时间");
       return;
     }
 

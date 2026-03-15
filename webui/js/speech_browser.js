@@ -178,7 +178,7 @@ class MicrophoneInput {
         } catch (error) {
 
             console.error('Microphone initialization error:', error);
-            window.toastFrontendError('Failed to access microphone. Please check permissions.', 'Microphone Error');
+            window.toastFrontendError('无法访问麦克风。请检查权限。', '麦克风错误');
             return false;
         }
     }
@@ -268,7 +268,7 @@ class MicrophoneInput {
             }
         } catch (error) {
             console.error('Transcription error:', error);
-            window.toastFrontendError('Transcription failed.', 'Speech Recognition Error');
+            window.toastFrontendError('转录失败。', '语音识别错误');
         } finally {
             URL.revokeObjectURL(audioUrl);
             this.audioChunks = [];
@@ -347,7 +347,7 @@ async function requestMicrophonePermission() {
         return true;
     } catch (err) {
         console.error('Error accessing microphone:', err);
-        window.toastFrontendError('Microphone access denied. Please enable microphone access in your browser settings.', 'Microphone Error');
+        window.toastFrontendError('麦克风访问被拒绝。请在浏览器设置中启用麦克风访问。', '麦克风错误');
         return false;
     }
 }

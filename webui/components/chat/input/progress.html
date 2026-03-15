@@ -12,21 +12,21 @@
         </h4>
         <div id="progress-bar-right">
           <h4 id="progress-bar-stop-speech" x-data x-cloak x-show="$store.speech.isSpeaking">
-              <span id="stop-speech" @click="$store.speech.stop()" style="cursor: pointer" title="Stop Speech" aria-label="Stop Speech">
+              <span id="stop-speech" @click="$store.speech.stop()" style="cursor: pointer" title="停止语音" aria-label="停止语音">
                   <span class="icon material-symbols-outlined">volume_off</span>
               </span>
           </h4>
           <div id="chat-nav-buttons" aria-label="Chat navigation">
-            <button class="btn-icon-action" title="Scroll to top" x-on:click="$store.chatNavigation.scrollToTop()">
+            <button class="btn-icon-action" title="滚动到顶部" x-on:click="$store.chatNavigation.scrollToTop()">
               <span class="material-symbols-outlined">vertical_align_top</span>
             </button>
-            <button class="btn-icon-action" title="Previous user message" x-on:click="$store.chatNavigation.scrollToPrevUserMessage()">
+            <button class="btn-icon-action" title="上一条用户消息" x-on:click="$store.chatNavigation.scrollToPrevUserMessage()">
               <span class="material-symbols-outlined">keyboard_arrow_up</span>
             </button>
-            <button class="btn-icon-action" title="Next user message" x-on:click="$store.chatNavigation.scrollToNextUserMessage()">
+            <button class="btn-icon-action" title="下一条用户消息" x-on:click="$store.chatNavigation.scrollToNextUserMessage()">
               <span class="material-symbols-outlined">keyboard_arrow_down</span>
             </button>
-            <button class="btn-icon-action" title="Scroll to bottom" x-on:click="$store.chatNavigation.scrollToBottom()">
+            <button class="btn-icon-action" title="滚动到底部" x-on:click="$store.chatNavigation.scrollToBottom()">
               <span class="material-symbols-outlined">vertical_align_bottom</span>
             </button>
           </div>

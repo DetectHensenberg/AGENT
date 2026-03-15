@@ -17,15 +17,14 @@
 
             <!-- Keep in mind that <template> can have only one root element inside -->
             <div id="tunnel-settings-section">
-                <div class="section-title">Flare Tunnel</div>
-                <div class="section-description">Create a secure public URL to access your Agent Zero instance anytime,
-                    anywhere.</div>
+                <div class="section-title">Flare 隧道</div>
+                <div class="section-description">创建安全的公共 URL，随时随地访问您的 Agent Zero 实例。</div>
                 <!-- Tunnel content UI -->
                 <div class="tunnel-container">
                     <div class="field">
                         <div class="field-label">
-                            <div class="field-title">Tunnel provider</div>
-                            <div class="field-description">Select provider for public tunnel</div>
+                            <div class="field-title">隧道提供商</div>
+                            <div class="field-description">选择公共隧道提供商</div>
                         </div>
                         <div class="field-control">
                             <select id="tunnel-provider" x-model="$store.tunnelStore.provider"
@@ -39,18 +38,18 @@
                     <!-- Loading spinner for tunnel operations -->
                     <div class="tunnel-loading-status" x-show="$store.tunnelStore.isLoading">
                         <span class="icon material-symbols-outlined spin">progress_activity</span>
-                        <span x-text="$store.tunnelStore.loadingText || 'Processing tunnel request...'"></span>
+                        <span x-text="$store.tunnelStore.loadingText || '正在处理隧道请求...'"></span>
                     </div>
                     <!-- Microsoft login code display -->
                     <div class="microsoft-login-box" x-show="$store.tunnelStore.microsoftLoginCode" x-transition>
                         <div class="microsoft-login-header">
                             <span class="microsoft-login-icon material-symbols-outlined">key</span>
-                            <div class="microsoft-login-title">Microsoft Login Required</div>
+                            <div class="microsoft-login-title">需要 Microsoft 登录</div>
                         </div>
                         <div class="microsoft-login-steps">
                             <div class="microsoft-login-step">
                                 <span class="step-number">1</span>
-                                <span class="step-text">Open the authentication page:</span>
+                                <span class="step-text">打开身份验证页面：</span>
                             </div>
                             <a class="microsoft-login-link" :href="$store.tunnelStore.microsoftLoginUrl" target="_blank">
                                 <span class="icon material-symbols-outlined">open_in_new</span>
@@ -58,19 +57,19 @@
                             </a>
                             <div class="microsoft-login-step">
                                 <span class="step-number">2</span>
-                                <span class="step-text">Enter this code:</span>
+                                <span class="step-text">输入此代码：</span>
                             </div>
                         </div>
                         <div class="microsoft-login-code-container">
                             <div class="microsoft-login-code" x-text="$store.tunnelStore.microsoftLoginCode"></div>
                             <button class="btn btn-copy-code" @click="$store.tunnelStore.copyLoginCode()" :class="$store.tunnelStore.codeCopied ? 'copied' : ''">
                                 <span class="icon material-symbols-outlined" x-text="$store.tunnelStore.codeCopied ? 'check' : 'content_copy'"></span>
-                                <span x-text="$store.tunnelStore.codeCopied ? 'Copied!' : 'Copy Code'"></span>
+                                <span x-text="$store.tunnelStore.codeCopied ? '已复制!' : '复制代码'"></span>
                             </button>
                         </div>
                         <div class="microsoft-login-footer">
                             <span class="icon material-symbols-outlined spin-slow">sync</span>
-                            <span>Waiting for authentication to complete...</span>
+                            <span>等待身份验证完成...</span>
                         </div>
                     </div>
 
@@ -83,12 +82,12 @@
                                     readonly>
                                 <div class="buttons-row">
                                     <button class="copy-link-button" @click="$store.tunnelStore.copyToClipboard()"
-                                        title="Copy to clipboard">
-                                        <span class="icon material-symbols-outlined">content_copy</span> Copy
+                                        title="复制到剪贴板">
+                                        <span class="icon material-symbols-outlined">content_copy</span> 复制
                                     </button>
                                     <button class="refresh-link-button" @click="$store.tunnelStore.refreshLink()"
-                                        title="Generate new URL">
-                                        <span class="icon material-symbols-outlined">refresh</span> Refresh
+                                        title="生成新 URL">
+                                        <span class="icon material-symbols-outlined">refresh</span> 刷新
                                     </button>
                                 </div>
                             </div>
@@ -96,24 +95,24 @@
                                 <div class="tunnel-qr-code" id="qrcode-tunnel">
                                     <!-- QR code will be generated here -->
                                 </div>
-                                <div class="tunnel-qr-label">Scan with mobile device</div>
+                                <div class="tunnel-qr-label">用移动设备扫描</div>
                             </div>
                             <div class="tunnel-link-info">
-                                Share this URL to allow others to access your Agent Zero instance.
+                                分享此 URL 以允许其他人访问您的 Agent Zero 实例。
                             </div>
                             <div class="tunnel-link-persistence">
-                                This URL will persist until you stop the tunnel or restart the Docker container.
+                                此 URL 将持续有效，直到您停止隧道或重启 Docker 容器。
                             </div>
                             <div class="stop-tunnel-container">
                                 <button class="btn btn-danger" @click="$store.tunnelStore.stopTunnel()">
-                                    <span class="icon material-symbols-outlined">stop_circle</span> Stop Tunnel
+                                    <span class="icon material-symbols-outlined">stop_circle</span> 停止隧道
                                 </button>
                             </div>
                         </div>
                         <!-- Generate tunnel button when no link exists -->
                         <div class="tunnel-actions" x-show="!$store.tunnelStore.linkGenerated">
                             <button class="btn btn-ok" @click="$store.tunnelStore.generateLink()">
-                                <span class="icon material-symbols-outlined">play_circle</span> Create Tunnel
+                                <span class="icon material-symbols-outlined">play_circle</span> 创建隧道
                             </button>
                         </div>
                     </div>

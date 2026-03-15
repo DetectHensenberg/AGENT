@@ -107,13 +107,13 @@ const model = {
 
   async previewImport() {
     if (!this.skillsFile) {
-      this.error = "Please select a skills .zip file first";
+      this.error = "请先选择技能 .zip 文件";
       return;
     }
 
     try {
       this.loading = true;
-      this.loadingMessage = "Previewing skills import...";
+      this.loadingMessage = "正在预览技能导入...";
       this.error = "";
       this.preview = null;
 
@@ -124,7 +124,7 @@ const model = {
 
       const result = await response.json();
       if (!result.success) {
-        this.error = result.error || "Preview failed";
+        this.error = result.error || "预览失败";
         return;
       }
 
@@ -132,7 +132,7 @@ const model = {
       // normalize namespace (server may sanitize)
       if (result.namespace) this.namespace = result.namespace;
     } catch (e) {
-      this.error = `Preview error: ${e.message}`;
+      this.error = `预览错误: ${e.message}`;
     } finally {
       this.loading = false;
       this.loadingMessage = "";
@@ -141,13 +141,13 @@ const model = {
 
   async performImport() {
     if (!this.skillsFile) {
-      this.error = "Please select a skills .zip file first";
+      this.error = "请先选择技能 .zip 文件";
       return;
     }
 
     try {
       this.loading = true;
-      this.loadingMessage = "Importing skills...";
+      this.loadingMessage = "正在导入技能...";
       this.error = "";
       this.result = null;
 
@@ -158,7 +158,7 @@ const model = {
 
       const result = await response.json();
       if (!result.success) {
-        this.error = result.error || "Import failed";
+        this.error = result.error || "导入失败";
         return;
       }
 
@@ -166,12 +166,12 @@ const model = {
       this.preview = result; // keep last info visible
       if (window.toastFrontendInfo) {
         window.toastFrontendInfo(
-          `Imported ${result.imported_count} skill folder(s)`,
-          "Skills Import"
+          `已导入 ${result.imported_count} 个技能文件夹`,
+          "技能导入"
         );
       }
     } catch (e) {
-      this.error = `Import error: ${e.message}`;
+      this.error = `导入错误: ${e.message}`;
     } finally {
       this.loading = false;
       this.loadingMessage = "";

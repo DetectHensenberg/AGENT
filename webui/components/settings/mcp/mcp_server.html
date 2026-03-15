@@ -1,22 +1,22 @@
 <html>
   <head>
-    <title>A0 MCP Server</title>
+    <title>A0 MCP 服务器</title>
   </head>
 
   <body>
     <div x-data="{ get settings() { return $store.settings.settings } }">
       <template x-if="settings">
         <div>
-          <div class="section-title">A0 MCP Server</div>
+          <div class="section-title">A0 MCP 服务器</div>
           <div class="section-description">
-            Agent Zero can be exposed as an SSE MCP server. See <a href="javascript:openModal('settings/mcp/server/example.html')">connection example</a>.
+            Agent Zero 可以作为 SSE MCP 服务器暴露。参见<a href="javascript:openModal('settings/mcp/server/example.html')">连接示例</a>。
           </div>
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Enable A0 MCP Server</div>
+              <div class="field-title">启用 A0 MCP 服务器</div>
               <div class="field-description">
-                Expose Agent Zero as an SSE/HTTP MCP server. This will make this A0 instance available to MCP clients.
+                将 Agent Zero 作为 SSE/HTTP MCP 服务器暴露。这将使此 A0 实例可供 MCP 客户端使用。
               </div>
             </div>
             <div class="field-control">

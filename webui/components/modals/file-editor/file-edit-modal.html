@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>File Editor</title>
+  <title>文件编辑器</title>
   <script type="module">
     import { store } from "/components/modals/file-editor/file-editor-store.js";
   </script>
@@ -12,7 +12,7 @@
         <template x-if="$store.fileEditor.isEditLoading">
           <div class="loading-state">
             <div class="loading-spinner"></div>
-            <p>Loading file…</p>
+            <p>正在加载文件…</p>
           </div>
         </template>
 
@@ -26,7 +26,7 @@
           <div class="file-edit-content">
             <div class="file-edit-meta">
               <div class="file-edit-field">
-                <label>File name</label>
+                <label>文件名</label>
                 <input
                   type="text"
                   x-model="$store.fileEditor.editFileName"
@@ -48,12 +48,12 @@
 
   <template x-if="$store.fileEditor">
     <div class="modal-footer" data-modal-footer>
-      <button class="btn btn-cancel" @click="$store.fileEditor.closeFileEditor()" :disabled="$store.fileEditor.isSaving">Cancel</button>
+      <button class="btn btn-cancel" @click="$store.fileEditor.closeFileEditor()" :disabled="$store.fileEditor.isSaving">取消</button>
       <button
         class="btn btn-ok"
         @click="$store.fileEditor.saveFileEdits()"
         :disabled="$store.fileEditor.isSaving || $store.fileEditor.isEditLoading || $store.fileEditor.editError"
-        x-text="$store.fileEditor.isSaving ? 'Saving…' : 'Save'"
+        x-text="$store.fileEditor.isSaving ? '保存中…' : '保存'"
       ></button>
     </div>
   </template>

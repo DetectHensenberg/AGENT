@@ -1095,7 +1095,7 @@ export function drawMessageCodeExe({
   agentno = 0,
   ...additional
 }) {
-  let title = "Code Execution";
+  let title = "代码执行";
   // show command at the start and end
   if (kvps?.code && /done_all|code_execution_tool/.test(heading || "")) {
     const s = kvps.session;
@@ -1128,12 +1128,12 @@ export function drawMessageCodeExe({
       ),
     ),
     commandText.trim()
-      ? createActionButton("copy", "Command", () =>
+      ? createActionButton("copy", "命令", () =>
           copyToClipboard(commandText),
         )
       : null,
     outputText.trim()
-      ? createActionButton("copy", "Output", () => copyToClipboard(outputText))
+      ? createActionButton("copy", "输出", () => copyToClipboard(outputText))
       : null,
   ].filter(Boolean);
   const stepData = drawProcessStep({
@@ -1559,7 +1559,7 @@ function drawKvpsIncremental(container, kvps, latex) {
         const imgElement = document.createElement("img");
         imgElement.classList.add("kvps-img");
         imgElement.src = value.replace("img://", "/image_get?path=");
-        imgElement.alt = "Image Attachment";
+        imgElement.alt = "图片附件";
         tdiv.appendChild(imgElement);
 
         // Add click handler and cursor change
@@ -1607,7 +1607,7 @@ function convertImageTags(content) {
   const updatedContent = content.replace(
     imageTagRegex,
     (match, base64Content) => {
-      return `<img src="data:image/jpeg;base64,${base64Content}" alt="Image Attachment" style="max-width: 250px !important;"/>`;
+      return `<img src="data:image/jpeg;base64,${base64Content}" alt="图片附件" style="max-width: 250px !important;"/>`;
     },
   );
 
@@ -1770,13 +1770,13 @@ function createProcessGroup(id) {
   header.classList.add("process-group-header");
   header.innerHTML = `
     <span class="expand-icon"></span>
-    <span class="group-title">Processing...</span>
+    <span class="group-title">处理中...</span>
     <span class="step-badge GEN">GEN</span>
     <span class="group-metrics">
-      <span class="metric-time" title="Start time"><span class="material-symbols-outlined">schedule</span><span class="metric-value">--:--</span></span>
-      <span class="metric-steps display-none" title="Steps"><span class="material-symbols-outlined">footprint</span><span class="metric-value">0</span></span>
-      <span class="metric-notifications" title="Warnings/Info/Hint" hidden><span class="material-symbols-outlined">priority_high</span><span class="metric-value">0</span></span>
-      <span class="metric-duration display-none" title="Duration"><span class="material-symbols-outlined">timer</span><span class="metric-value">--</span></span>
+      <span class="metric-time" title="开始时间"><span class="material-symbols-outlined">schedule</span><span class="metric-value">--:--</span></span>
+      <span class="metric-steps display-none" title="步骤"><span class="material-symbols-outlined">footprint</span><span class="metric-value">0</span></span>
+      <span class="metric-notifications" title="警告/信息/提示" hidden><span class="material-symbols-outlined">priority_high</span><span class="metric-value">0</span></span>
+      <span class="metric-duration display-none" title="时长"><span class="material-symbols-outlined">timer</span><span class="metric-value">--</span></span>
 
     </span>
   `;
@@ -2178,7 +2178,7 @@ function setupCollapsible(
   const btn = ensureChild(container, ".expand-btn", "button", "expand-btn");
   const syncBtn = () => {
     const exp = messageDiv.classList.contains("expanded");
-    btn.textContent = exp ? "Show less" : "Show more";
+    btn.textContent = exp ? "收起" : "展开更多";
     btn.classList.toggle("show-less-btn", exp);
     btn.classList.toggle("show-more-btn", !exp);
   };

@@ -15,38 +15,38 @@
                     <div class="welcome-actions">
                         <div class="welcome-action-card" @click="$store.welcomeStore.executeAction('new-chat')">
                             <span class="material-symbols-outlined welcome-action-icon">add_circle</span>
-                            <h3 class="welcome-action-title">New Chat</h3>
+                            <h3 class="welcome-action-title">新建对话</h3>
                         </div>
 
                         <div class="welcome-action-card" @click="$store.welcomeStore.executeAction('projects')">
                             <span class="material-symbols-outlined welcome-action-icon">folder</span>
-                            <h3 class="welcome-action-title">Projects</h3>
+                            <h3 class="welcome-action-title">项目</h3>
                         </div>
                         <div class="welcome-action-card" @click="$store.welcomeStore.executeAction('memory')">
                             <span class="material-symbols-outlined welcome-action-icon">memory</span>
-                            <h3 class="welcome-action-title">Memory</h3>
+                            <h3 class="welcome-action-title">记忆</h3>
                         </div>
 
                         <div class="welcome-action-card" @click="$store.welcomeStore.executeAction('scheduler')">
                             <span class="material-symbols-outlined welcome-action-icon">schedule</span>
-                            <h3 class="welcome-action-title">Scheduler</h3>
+                            <h3 class="welcome-action-title">定时任务</h3>
                         </div>
                         <div class="welcome-action-card" @click="$store.welcomeStore.executeAction('settings')">
                             <span class="material-symbols-outlined welcome-action-icon">settings</span>
-                            <h3 class="welcome-action-title">Settings</h3>
+                            <h3 class="welcome-action-title">设置</h3>
                         </div>
 
                         <div class="welcome-action-card" @click="$store.welcomeStore.executeAction('files')">
                             <span class="material-symbols-outlined welcome-action-icon">folder_open</span>
-                            <h3 class="welcome-action-title">Files</h3>
+                            <h3 class="welcome-action-title">文件</h3>
                         </div>
                         <div class="welcome-action-card" @click="$store.welcomeStore.executeAction('website')">
                             <span class="material-symbols-outlined welcome-action-icon">language</span>
-                            <h3 class="welcome-action-title">Visit Website</h3>
+                            <h3 class="welcome-action-title">访问官网</h3>
                         </div>
                         <div class="welcome-action-card" @click="$store.welcomeStore.executeAction('github')">
                             <span class="material-symbols-outlined welcome-action-icon">code</span>
-                            <h3 class="welcome-action-title">Visit GitHub</h3>
+                            <h3 class="welcome-action-title">访问 GitHub</h3>
                         </div>
                     </div>
 
@@ -55,7 +55,7 @@
                                 class="welcome-refresh-button"
                                 @click="$store.welcomeStore.refreshBanners(true)"
                                 :disabled="$store.welcomeStore.bannersLoading"
-                                title="Refresh banners">
+                                title="刷新公告">
                             <span class="material-symbols-outlined" :class="{ 'welcome-spin': $store.welcomeStore.bannersLoading }">refresh</span>
                         </button>
 
@@ -64,7 +64,7 @@
                                 @click="$store.welcomeStore.undismissBanners()"
                                 x-show="$store.welcomeStore.hasDismissedBanners"
                                 :disabled="$store.welcomeStore.bannersLoading"
-                                title="Undismiss all banners">
+                                title="恢复已关闭公告">
                             <span class="material-symbols-outlined">undo</span>
                         </button>
                     </div>
@@ -88,7 +88,7 @@
                                 <button class="welcome-banner-dismiss" 
                                         x-show="banner.dismissible !== false"
                                         @click.stop="$store.welcomeStore.dismissBanner(banner.id)"
-                                        title="Dismiss">
+                                        title="关闭">
                                     <span class="material-symbols-outlined">close</span>
                                 </button>
                             </div>

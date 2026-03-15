@@ -1,21 +1,21 @@
 <html>
   <head>
-    <title>Chat Model</title>
+    <title>聊天模型</title>
   </head>
 
   <body>
     <div x-data>
       <template x-if="$store.settings.settings">
         <div>
-          <div class="section-title">Chat Model</div>
+          <div class="section-title">聊天模型</div>
           <div class="section-description">
-            Selection and settings for main chat model used by Agent Zero
+            Agent Zero 使用的主聊天模型的选择和设置
           </div>
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Chat model provider</div>
-              <div class="field-description">Select provider for main chat model used by Agent Zero</div>
+              <div class="field-title">聊天模型提供商</div>
+              <div class="field-description">选择 Agent Zero 使用的主聊天模型提供商</div>
             </div>
             <div class="field-control">
               <select x-model="$store.settings.settings.chat_model_provider">
@@ -28,8 +28,8 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Chat model name</div>
-              <div class="field-description">Exact name of model from selected provider</div>
+              <div class="field-title">聊天模型名称</div>
+              <div class="field-description">所选提供商的确切模型名称</div>
             </div>
             <div class="field-control">
               <input type="text" x-model="$store.settings.settings.chat_model_name" />
@@ -38,8 +38,8 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">API key</div>
-              <div class="field-description">API key for the selected chat model provider</div>
+              <div class="field-title">API 密钥</div>
+              <div class="field-description">所选聊天模型提供商的 API 密钥</div>
             </div>
             <div class="field-control">
               <input
@@ -52,9 +52,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Chat model API base URL</div>
+              <div class="field-title">聊天模型 API 基础 URL</div>
               <div class="field-description">
-                API base URL for main chat model. Leave empty for default. Only relevant for Azure, local and custom (other) providers.
+                主聊天模型的 API 基础 URL。留空则使用默认值。仅对 Azure、本地和自定义（其他）提供商有效。
               </div>
             </div>
             <div class="field-control">
@@ -64,9 +64,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Chat model context length</div>
+              <div class="field-title">聊天模型上下文长度</div>
               <div class="field-description">
-                Maximum number of tokens in the context window for LLM. System prompt, chat history, RAG and response all count towards this limit.
+                LLM 上下文窗口的最大 token 数。系统提示词、聊天历史、RAG 和响应都会计入此限制。
               </div>
             </div>
             <div class="field-control">
@@ -76,9 +76,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Context window space for chat history</div>
+              <div class="field-title">聊天历史的上下文窗口空间</div>
               <div class="field-description">
-                Portion of context window dedicated to chat history visible to the agent. Chat history will automatically be optimized to fit. Smaller size will result in shorter and more summarized history. The remaining space will be used for system prompt, RAG and response.
+                分配给代理可见聊天历史的上下文窗口比例。聊天历史会自动优化以适应。较小的值会导致历史更短且更概括。剩余空间将用于系统提示词、RAG 和响应。
               </div>
             </div>
             <div class="field-control">
@@ -95,9 +95,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Supports Vision</div>
+              <div class="field-title">支持视觉</div>
               <div class="field-description">
-                Models capable of Vision can for example natively see the content of image attachments.
+                支持视觉的模型可以原生查看图片附件的内容。
               </div>
             </div>
             <div class="field-control">
@@ -110,9 +110,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Requests per minute limit</div>
+              <div class="field-title">每分钟请求数限制</div>
               <div class="field-description">
-                Limits the number of requests per minute to the chat model. Waits if the limit is exceeded. Set to 0 to disable rate limiting.
+                限制每分钟对聊天模型的请求数。超过限制时会等待。设为 0 可禁用速率限制。
               </div>
             </div>
             <div class="field-control">
@@ -122,9 +122,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Input tokens per minute limit</div>
+              <div class="field-title">每分钟输入 token 数限制</div>
               <div class="field-description">
-                Limits the number of input tokens per minute to the chat model. Waits if the limit is exceeded. Set to 0 to disable rate limiting.
+                限制每分钟对聊天模型的输入 token 数。超过限制时会等待。设为 0 可禁用速率限制。
               </div>
             </div>
             <div class="field-control">
@@ -134,9 +134,9 @@
 
           <div class="field">
             <div class="field-label">
-              <div class="field-title">Output tokens per minute limit</div>
+              <div class="field-title">每分钟输出 token 数限制</div>
               <div class="field-description">
-                Limits the number of output tokens per minute to the chat model. Waits if the limit is exceeded. Set to 0 to disable rate limiting.
+                限制每分钟对聊天模型的输出 token 数。超过限制时会等待。设为 0 可禁用速率限制。
               </div>
             </div>
             <div class="field-control">
@@ -146,9 +146,9 @@
 
           <div class="field field-full">
             <div class="field-label">
-              <div class="field-title">Chat model additional parameters</div>
+              <div class="field-title">聊天模型附加参数</div>
               <div class="field-description">
-                Any other parameters supported by <a href='https://docs.litellm.ai/docs/set_keys' target='_blank'>LiteLLM</a>. Format is KEY=VALUE on individual lines, like .env file. Value can also contain JSON objects - when unquoted, it is treated as object, number etc., when quoted, it is treated as string.
+                <a href='https://docs.litellm.ai/docs/set_keys' target='_blank'>LiteLLM</a> 支持的其他参数。格式为每行 KEY=VALUE，类似 .env 文件。值也可以包含 JSON 对象 - 未加引号时视为对象、数字等，加引号时视为字符串。
               </div>
             </div>
             <div class="field-control">

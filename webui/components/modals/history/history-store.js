@@ -48,7 +48,7 @@ const model = {
       
     } catch (error) {
       console.error("History fetch error:", error);
-      this.error = error?.message || "Failed to load history";
+      this.error = error?.message || "加载历史记录失败";
       this.isLoading = false;
       this.updateModalTitle(); // Show error in title
     }
@@ -77,7 +77,7 @@ const model = {
     // Check if ACE is available
     if (!window.ace?.edit) {
       console.error("ACE editor not available");
-      this.error = "Editor library not loaded";
+      this.error = "编辑器库未加载";
       return;
     }
 

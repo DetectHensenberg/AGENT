@@ -153,7 +153,7 @@ export function openModal(modalPath, beforeClose = null) {
         })
         .catch((error) => {
           console.error("Error loading modal content:", error);
-          modal.body.innerHTML = `<div class="error">Failed to load modal content: ${error.message}</div>`;
+          modal.body.innerHTML = `<div class="error">加载模态框内容失败: ${error.message}</div>`;
         });
 
       // Add modal to stack and show it

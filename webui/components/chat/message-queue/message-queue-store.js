@@ -203,8 +203,8 @@ const model = {
       await sleep(1000);
       if (this.pendingItems.length > 0) {
         toastFrontendInfo(
-          "There are pending uploads in the queue. You can wait for them to finish or remove them.",
-          "Pending uploads",
+          "队列中有待上传的项目。您可以等待它们完成或将其移除。",
+          "待上传",
           3,
           "pending-uploads",
           NotificationPriority.NORMAL,

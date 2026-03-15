@@ -222,7 +222,7 @@ const model = {
       editor.navigateFileStart();
     } catch (error) {
       console.error("Failed to format JSON:", error);
-      this.error = "Invalid JSON: " + error.message;
+      this.error = "无效的 JSON: " + error.message;
     }
   },
 
@@ -265,7 +265,7 @@ const model = {
         this.error = response.error;
       }
     } catch (error) {
-      this.error = `Preview error: ${error.message}`;
+      this.error = `预览错误: ${error.message}`;
     }
   },
 
@@ -309,7 +309,7 @@ const model = {
       this.error = '';
       return true;
     } catch (error) {
-      this.error = `Invalid backup metadata: ${error.message}`;
+      this.error = `无效的备份元数据: ${error.message}`;
       return false;
     }
   },
@@ -376,9 +376,9 @@ const model = {
     const fileList = this.previewFiles.map(f => f.path).join('\n');
     try {
       await navigator.clipboard.writeText(fileList);
-      window.toastFrontendInfo('File list copied to clipboard', 'Clipboard');
+      window.toastFrontendInfo('文件列表已复制到剪贴板', '剪贴板');
     } catch (error) {
-      window.toastFrontendError('Failed to copy to clipboard', 'Clipboard Error');
+      window.toastFrontendError('复制到剪贴板失败', '剪贴板错误');
     }
   },
 
@@ -391,10 +391,10 @@ const model = {
 
     try {
       this.loading = true;
-      this.loadingMessage = 'Creating backup...';
+      this.loadingMessage = '正在创建备份...';
       this.error = '';
       this.clearFileOperations();
-      this.addFileOperation('Starting backup creation...');
+      this.addFileOperation('开始创建备份...');
 
       const metadata = this.backupMetadataConfig;
 
@@ -420,22 +420,22 @@ const model = {
         a.click();
         window.URL.revokeObjectURL(url);
 
-        this.addFileOperation('Backup created and downloaded successfully!');
-        window.toastFrontendInfo('Backup created and downloaded successfully', 'Backup Status');
+        this.addFileOperation('备份已成功创建并下载！');
+        window.toastFrontendInfo('备份已成功创建并下载', '备份状态');
       } else {
         // Try to parse error response
         const errorText = await response.text();
         try {
           const errorJson = JSON.parse(errorText);
-          this.error = errorJson.error || 'Backup creation failed';
+          this.error = errorJson.error || '备份创建失败';
         } catch {
-          this.error = `Backup creation failed: ${response.status} ${response.statusText}`;
+          this.error = `备份创建失败: ${response.status} ${response.statusText}`;
         }
         this.addFileOperation(`Error: ${this.error}`);
       }
 
     } catch (error) {
-      this.error = `Backup error: ${error.message}`;
+      this.error = `备份错误: ${error.message}`;
       this.addFileOperation(`Error: ${error.message}`);
     } finally {
       this.loading = false;
@@ -500,10 +500,10 @@ const model = {
 
     try {
       this.loading = true;
-      this.loadingMessage = 'Performing dry run...';
+      this.loadingMessage = '正在执行试运行...';
       this.error = '';
       this.clearFileOperations();
-      this.addFileOperation('Starting backup dry run...');
+      this.addFileOperation('开始备份试运行...');
 
       const metadata = this.backupMetadataConfig;
       const patternsString = this.convertPatternsToString(metadata.include_patterns, metadata.exclude_patterns);
@@ -515,18 +515,18 @@ const model = {
       });
 
       if (response.success) {
-        this.addFileOperation(`Found ${response.files.length} files that would be backed up:`);
+        this.addFileOperation(`找到 ${response.files.length} 个将被备份的文件:`);
         response.files.forEach((file, index) => {
           this.addFileOperation(`${index + 1}. ${file.path} (${this.formatFileSize(file.size)})`);
         });
-        this.addFileOperation(`\nTotal: ${response.files.length} files, ${this.formatFileSize(response.files.reduce((sum, f) => sum + f.size, 0))}`);
-        this.addFileOperation('Dry run completed successfully.');
+        this.addFileOperation(`\n总计: ${response.files.length} 个文件, ${this.formatFileSize(response.files.reduce((sum, f) => sum + f.size, 0))}`);
+        this.addFileOperation('试运行成功完成。');
       } else {
         this.error = response.error;
         this.addFileOperation(`Error: ${response.error}`);
       }
     } catch (error) {
-      this.error = `Dry run error: ${error.message}`;
+      this.error = `试运行错误: ${error.message}`;
       this.addFileOperation(`Error: ${error.message}`);
     } finally {
       this.loading = false;
@@ -535,17 +535,17 @@ const model = {
 
   async dryRunRestore() {
     if (!this.backupFile) {
-      this.error = 'Please select a backup file first';
+      this.error = '请先选择备份文件';
       return;
     }
 
     try {
       this.loading = true;
-      this.loadingMessage = 'Performing restore dry run...';
+      this.loadingMessage = '正在执行恢复试运行...';
       this.error = '';
       this.restoreResult = null;
       this.clearFileOperations();
-      this.addFileOperation('Starting restore dry run...');
+      this.addFileOperation('开始恢复试运行...');
 
       const formData = new FormData();
       formData.append('backup_file', this.backupFile);
@@ -563,7 +563,7 @@ const model = {
       if (result.success) {
         // Show delete operations if clean before restore is enabled
         if (result.files_to_delete && result.files_to_delete.length > 0) {
-          this.addFileOperation(`Clean before restore - ${result.files_to_delete.length} files would be deleted:`);
+          this.addFileOperation(`恢复前清理 - ${result.files_to_delete.length} 个文件将被删除:`);
           result.files_to_delete.forEach((file, index) => {
             this.addFileOperation(`${index + 1}. DELETE: ${file.path}`);
           });
@@ -572,7 +572,7 @@ const model = {
 
         // Show restore operations
         if (result.files_to_restore && result.files_to_restore.length > 0) {
-          this.addFileOperation(`${result.files_to_restore.length} files would be restored:`);
+          this.addFileOperation(`${result.files_to_restore.length} 个文件将被恢复:`);
           result.files_to_restore.forEach((file, index) => {
             this.addFileOperation(`${index + 1}. RESTORE: ${file.original_path} -> ${file.target_path}`);
           });
@@ -590,14 +590,14 @@ const model = {
         const restoreCount = result.restore_count || 0;
         const skippedCount = result.skipped_files?.length || 0;
 
-        this.addFileOperation(`\nSummary: ${deleteCount} to delete, ${restoreCount} to restore, ${skippedCount} skipped`);
-        this.addFileOperation('Dry run completed successfully.');
+        this.addFileOperation(`\n摘要: ${deleteCount} 个待删除, ${restoreCount} 个待恢复, ${skippedCount} 个已跳过`);
+        this.addFileOperation('试运行成功完成。');
       } else {
         this.error = result.error;
         this.addFileOperation(`Error: ${result.error}`);
       }
     } catch (error) {
-      this.error = `Dry run error: ${error.message}`;
+      this.error = `试运行错误: ${error.message}`;
       this.addFileOperation(`Error: ${error.message}`);
     } finally {
       this.loading = false;
@@ -615,7 +615,7 @@ const model = {
 
     try {
       this.loading = true;
-      this.loadingMessage = 'Inspecting backup archive...';
+      this.loadingMessage = '正在检查备份档案...';
 
       const formData = new FormData();
       formData.append('backup_file', file);
@@ -646,7 +646,7 @@ const model = {
         this.backupMetadata = null;
       }
     } catch (error) {
-      this.error = `Inspection error: ${error.message}`;
+      this.error = `检查错误: ${error.message}`;
       this.backupMetadata = null;
     } finally {
       this.loading = false;
@@ -664,7 +664,7 @@ const model = {
     const currentVersion = globalThis.gitinfo.version; // Retrieved from git.get_git_info() on backend
 
     if (backupVersion !== currentVersion && backupVersion !== "development") {
-      warnings.push(`Backup created with Agent Zero ${backupVersion}, current version is ${currentVersion}`);
+      warnings.push(`备份创建时的 Agent Zero 版本为 ${backupVersion}，当前版本为 ${currentVersion}`);
     }
 
     // Check backup age
@@ -672,7 +672,7 @@ const model = {
     const daysSinceBackup = (Date.now() - backupDate) / (1000 * 60 * 60 * 24);
 
     if (daysSinceBackup > 30) {
-      warnings.push(`Backup is ${Math.floor(daysSinceBackup)} days old`);
+      warnings.push(`备份已有 ${Math.floor(daysSinceBackup)} 天`);
     }
 
     // Check system compatibility
@@ -682,23 +682,23 @@ const model = {
     }
 
     if (warnings.length > 0) {
-      window.toastFrontendWarning(`Compatibility warnings: ${warnings.join(', ')}`, 'Backup Compatibility');
+      window.toastFrontendWarning(`兼容性警告: ${warnings.join(', ')}`, '备份兼容性');
     }
   },
 
   async performRestore() {
     if (!this.backupFile) {
-      this.error = 'Please select a backup file';
+      this.error = '请选择备份文件';
       return;
     }
 
     try {
       this.loading = true;
-      this.loadingMessage = 'Restoring files...';
+      this.loadingMessage = '正在恢复文件...';
       this.error = '';
       this.restoreResult = null;
       this.clearFileOperations();
-      this.addFileOperation('Starting file restoration...');
+      this.addFileOperation('开始文件恢复...');
 
       const formData = new FormData();
       formData.append('backup_file', this.backupFile);
@@ -716,7 +716,7 @@ const model = {
       if (result.success) {
         // Log deleted files if clean before restore was enabled
         if (result.deleted_files && result.deleted_files.length > 0) {
-          this.addFileOperation(`Clean before restore - Successfully deleted ${result.deleted_files.length} files:`);
+          this.addFileOperation(`恢复前清理 - 已成功删除 ${result.deleted_files.length} 个文件:`);
           result.deleted_files.forEach((file, index) => {
             this.addFileOperation(`${index + 1}. DELETED: ${file.path}`);
           });
@@ -724,14 +724,14 @@ const model = {
         }
 
         // Log restored files
-        this.addFileOperation(`Successfully restored ${result.restored_files.length} files:`);
+        this.addFileOperation(`已成功恢复 ${result.restored_files.length} 个文件:`);
         result.restored_files.forEach((file, index) => {
           this.addFileOperation(`${index + 1}. RESTORED: ${file.archive_path} -> ${file.target_path}`);
         });
 
         // Log skipped files
         if (result.skipped_files && result.skipped_files.length > 0) {
-          this.addFileOperation(`\nSkipped ${result.skipped_files.length} files:`);
+          this.addFileOperation(`\n跳过 ${result.skipped_files.length} 个文件:`);
           result.skipped_files.forEach((file, index) => {
             this.addFileOperation(`${index + 1}. ${file.original_path} (${file.reason})`);
           });
@@ -739,7 +739,7 @@ const model = {
 
         // Log errors
         if (result.errors && result.errors.length > 0) {
-          this.addFileOperation(`\nErrors during restoration:`);
+          this.addFileOperation(`\n恢复过程中的错误:`);
           result.errors.forEach((error, index) => {
             this.addFileOperation(`${index + 1}. ${error.original_path}: ${error.error}`);
           });
@@ -750,15 +750,15 @@ const model = {
         const skippedCount = result.skipped_files?.length || 0;
         const errorCount = result.errors?.length || 0;
 
-        this.addFileOperation(`\nRestore completed: ${deletedCount} deleted, ${restoredCount} restored, ${skippedCount} skipped, ${errorCount} errors`);
+        this.addFileOperation(`\n恢复完成: ${deletedCount} 个已删除, ${restoredCount} 个已恢复, ${skippedCount} 个已跳过, ${errorCount} 个错误`);
         this.restoreResult = result;
-        window.toastFrontendInfo('Restore completed successfully', 'Restore Status');
+        window.toastFrontendInfo('恢复已成功完成', '恢复状态');
       } else {
         this.error = result.error;
         this.addFileOperation(`Error: ${result.error}`);
       }
     } catch (error) {
-      this.error = `Restore error: ${error.message}`;
+      this.error = `恢复错误: ${error.message}`;
       this.addFileOperation(`Error: ${error.message}`);
     } finally {
       this.loading = false;
@@ -783,7 +783,7 @@ const model = {
       this.error = '';
       return true;
     } catch (error) {
-      this.error = `Invalid JSON metadata: ${error.message}`;
+      this.error = `无效的 JSON 元数据: ${error.message}`;
       return false;
     }
   },

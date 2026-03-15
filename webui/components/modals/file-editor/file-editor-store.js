@@ -58,7 +58,7 @@ const model = {
       const data = await resp.json().catch(() => ({}));
 
       if (!resp.ok || data.error) {
-        throw new Error(data.error || "Failed to load file");
+        throw new Error(data.error || "加载文件失败");
       }
 
       const payload = data.data || {};
@@ -71,11 +71,11 @@ const model = {
       this.isEditLoading = false;
       this.scheduleEditorInit();
     } catch (error) {
-      let message = error?.message || "Failed to load file";
+      let message = error?.message || "加载文件失败";
       message = this._extractErrorMessage(message);
       this.editError = message;
       this.isEditLoading = false;
-      window.toastFrontendError(message, "File Edit Error");
+      window.toastFrontendError(message, "文件编辑错误");
     }
   },
 
@@ -121,19 +121,19 @@ const model = {
 
     const fileName = this.editFileName.trim();
     if (!fileName) {
-      this.editSaveError = "File name is required.";
+      this.editSaveError = "文件名为必填项";
       return;
     }
     if (fileName === "." || fileName === "..") {
-      this.editSaveError = "File name cannot be '.' or '..'.";
+      this.editSaveError = "文件名不能为 '.' 或 '..'";
       return;
     }
     if (fileName.includes("/") || fileName.includes("\\")) {
-      this.editSaveError = "File name cannot include path separators.";
+      this.editSaveError = "文件名不能包含路径分隔符";
       return;
     }
     if (this.editIsNew && (this.existingNames || []).includes(fileName)) {
-      this.editSaveError = `An item named "${fileName}" already exists.`;
+      this.editSaveError = `名为 "${fileName}" 的项目已存在。`;
       return;
     }
 
@@ -143,7 +143,7 @@ const model = {
       : this.editTarget?.path || ""; // Note: was normalizePath(this.editTarget?.path) but path should be absolute from API
 
     if (!targetPath) {
-      window.toastFrontendError("File path is missing.", "Save File");
+      window.toastFrontendError("文件路径缺失。", "保存文件");
       return;
     }
 
@@ -159,7 +159,7 @@ const model = {
       const data = await resp.json().catch(() => ({}));
 
       if (!resp.ok || data.error) {
-        throw new Error(data.error || "Failed to save file");
+        throw new Error(data.error || "保存文件失败");
       }
 
       this.editOriginalContent = content;
@@ -179,9 +179,9 @@ const model = {
       this.isSaving = false;
       this.closeFileEditor();
     } catch (error) {
-      const message = error?.message || "Failed to save file";
+      const message = error?.message || "保存文件失败";
       this.editSaveError = message;
-      window.toastFrontendError(message, "Save File Error");
+      window.toastFrontendError(message, "保存文件错误");
       this.isSaving = false;
     }
   },
@@ -194,7 +194,7 @@ const model = {
     if (this.isSaving) return false;
     if (!this.editor) return true;
     if (!this.hasEditChanges()) return true;
-    return confirm("You have unsaved changes. Close without saving?");
+    return confirm("您有未保存的更改。确定不保存就关闭吗？");
   },
 
   // --- Helpers -------------------------------------------------------------
