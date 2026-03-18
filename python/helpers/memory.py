@@ -173,14 +173,29 @@ class Memory:
 
         # if db folder exists and is not empty:
         if os.path.exists(db_dir) and files.exists(db_dir, "index.faiss"):
-            db = MyFaiss.load_local(
-                folder_path=db_dir,
-                embeddings=embedder,
-                allow_dangerous_deserialization=True,
-                distance_strategy=DistanceStrategy.COSINE,
-                # normalize_L2=True,
-                relevance_score_fn=Memory._cosine_normalizer,
-            )  # type: ignore
+            # FAISS C++ cannot handle non-ASCII paths on Windows; copy to temp dir first
+            _load_dir = db_dir
+            _tmp_obj = None
+            if os.name == "nt" and not db_dir.isascii():
+                import tempfile, shutil
+                _tmp_obj = tempfile.TemporaryDirectory()
+                _load_dir = _tmp_obj.name
+                for fname in os.listdir(db_dir):
+                    src = os.path.join(db_dir, fname)
+                    if os.path.isfile(src):
+                        shutil.copy2(src, os.path.join(_load_dir, fname))
+            try:
+                db = MyFaiss.load_local(
+                    folder_path=_load_dir,
+                    embeddings=embedder,
+                    allow_dangerous_deserialization=True,
+                    distance_strategy=DistanceStrategy.COSINE,
+                    # normalize_L2=True,
+                    relevance_score_fn=Memory._cosine_normalizer,
+                )  # type: ignore
+            finally:
+                if _tmp_obj:
+                    _tmp_obj.cleanup()
 
             # if there is a mismatch in embeddings used, re-index the whole DB
             emb_ok = False
@@ -427,7 +442,15 @@ class Memory:
     def _save_db_file(db: MyFaiss, memory_subdir: str):
         abs_dir = abs_db_dir(memory_subdir)
         os.makedirs(abs_dir, exist_ok=True)
-        db.save_local(folder_path=abs_dir)
+        # FAISS C++ cannot handle non-ASCII paths on Windows; use a temp dir as intermediary
+        if os.name == "nt" and not abs_dir.isascii():
+            import tempfile, shutil
+            with tempfile.TemporaryDirectory() as tmp_dir:
+                db.save_local(folder_path=tmp_dir)
+                for fname in os.listdir(tmp_dir):
+                    shutil.move(os.path.join(tmp_dir, fname), os.path.join(abs_dir, fname))
+        else:
+            db.save_local(folder_path=abs_dir)
 
     @staticmethod
     def _get_comparator(condition: str):

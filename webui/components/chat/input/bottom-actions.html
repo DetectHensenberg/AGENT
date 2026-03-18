@@ -5,6 +5,7 @@
     import { store as historyStore } from "/components/modals/history/history-store.js";
     import { store as contextStore } from "/components/modals/context/context-store.js";
     import { store as chatsStore } from "/components/sidebar/chats/chats-store.js";
+    import { store as skillsStore } from "/components/modals/skills/skills-store.js";
   </script>
 </head>
 <body>
@@ -72,6 +73,15 @@
                 <path d="M34.5,58h-6.18c-3.17,0-6.15-1.23-8.39-3.47L1.16,35.75c-1.54-1.54-1.54-4.05,0-5.59,2.4-2.4,6.27-2.68,8.99-.64l4.58,3.44V10.55c0-2.91,2.36-5.27,5.27-5.27s5.27,2.36,5.27,5.27v8.62c.78-.45,1.68-.71,2.64-.71,2.3,0,4.26,1.48,4.98,3.53.84-.56,1.85-.89,2.93-.89,2.3,0,4.26,1.48,4.98,3.53.84-.56,1.85-.89,2.93-.89,2.91,0,5.27,2.36,5.27,5.27v14.5c0,8-6.51,14.5-14.5,14.5ZM6.03,30.79c-1.1,0-2.19.42-3.01,1.23-.51.51-.51,1.35,0,1.86l18.77,18.78c1.74,1.74,4.06,2.7,6.53,2.7h6.18c6.54,0,11.86-5.32,11.86-11.86v-14.5c0-1.45-1.18-2.64-2.64-2.64s-2.64,1.18-2.64,2.64v1.32c0,.73-.59,1.32-1.32,1.32s-1.32-.59-1.32-1.32v-3.95c0-1.45-1.18-2.64-2.64-2.64s-2.64,1.18-2.64,2.64v3.95c0,.73-.59,1.32-1.32,1.32s-1.32-.59-1.32-1.32v-6.59c0-1.45-1.18-2.64-2.64-2.64s-2.64,1.18-2.64,2.64v6.59c0,.73-.59,1.32-1.32,1.32s-1.32-.59-1.32-1.32V10.55c0-1.45-1.18-2.64-2.64-2.64s-2.64,1.18-2.64,2.64v25.05c0,.5-.28.95-.73,1.18s-.98.18-1.38-.12l-6.69-5.02c-.75-.56-1.65-.84-2.54-.84Z" stroke-width="0.5" stroke="currentColor"/>
             </svg>
             <p>提醒</p>
+        </button>
+
+        <button class="text-button" id="skills_window" @click="$store.skills.open()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+            </svg>
+            <p>技能</p>
         </button>
       </div>
     </template>

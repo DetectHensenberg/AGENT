@@ -95,23 +95,42 @@ async def call_development_function(func: Callable[..., T], *args, **kwargs) -> 
 async def call_development_function(
     func: Union[Callable[..., T], Callable[..., Awaitable[T]]], *args, **kwargs
 ) -> T:
+    # 优化：开发模式下优先本地执行，避免 RFC 超时
+    # RFC 仅在明确需要远程执行时使用（如 Docker 容器内）
     if is_development():
-        url = _get_rfc_url()
-        password = _get_rfc_password()
-        # Normalize path components to build a valid Python module path across OSes
-        module_path = Path(
-            files.deabsolute_path(func.__code__.co_filename)
-        ).with_suffix("")
-        module = ".".join(module_path.parts)  # __module__ is not reliable
-        result = await rfc.call_rfc(
-            url=url,
-            password=password,
-            module=module,
-            function_name=func.__name__,
-            args=list(args),
-            kwargs=kwargs,
-        )
-        return cast(T, result)
+        # 先尝试本地执行（大多数情况下更快）
+        try:
+            if inspect.iscoroutinefunction(func):
+                return await func(*args, **kwargs)
+            else:
+                return func(*args, **kwargs)  # type: ignore
+        except Exception:
+            # 本地执行失败时尝试 RFC（可能需要 Docker 环境）
+            pass
+        
+        # 回退到 RFC 调用
+        try:
+            url = _get_rfc_url()
+            password = _get_rfc_password()
+            module_path = Path(
+                files.deabsolute_path(func.__code__.co_filename)
+            ).with_suffix("")
+            module = ".".join(module_path.parts)
+            result = await rfc.call_rfc(
+                url=url,
+                password=password,
+                module=module,
+                function_name=func.__name__,
+                args=list(args),
+                kwargs=kwargs,
+            )
+            return cast(T, result)
+        except Exception:
+            # RFC 也失败，重新抛出本地执行的异常
+            if inspect.iscoroutinefunction(func):
+                return await func(*args, **kwargs)
+            else:
+                return func(*args, **kwargs)  # type: ignore
     else:
         if inspect.iscoroutinefunction(func):
             return await func(*args, **kwargs)
